@@ -41,6 +41,5 @@ El trabajo del equipo abarca programación, diseño de niveles, arte y sonido.
 
 ## Enlaces
 
-- [Página del proyecto en itch.io](https://yuu729.itch.io/ultimate-space-shooter-hito-0)
 - [Devlog: Project Invasion release](https://yuu729.itch.io/ultimate-space-shooter-hito-0/devlog/1658441/project-invasion-release)
 - [Repositorio en GitHub](https://github.com/nicsoto/invasion)
