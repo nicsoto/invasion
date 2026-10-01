@@ -1,0 +1,28 @@
+[gd_scene format=3 uid="uid://b4kvqppumh11e"]
+
+[ext_resource type="Script" uid="uid://b3mgbr6d46mko" path="res://enemigo_grande.gd" id="1_redfx"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_eg8xt"]
+albedo_color = Color(1, 0.22745098, 0.050980393, 1)
+emission_enabled = true
+emission = Color(0.83137256, 0, 0, 1)
+emission_energy_multiplier = 9.62
+
+[sub_resource type="BoxMesh" id="BoxMesh_usgnq"]
+material = SubResource("StandardMaterial3D_eg8xt")
+size = Vector3(3, 1, 3)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_usgnq"]
+size = Vector3(3, 1, 3)
+
+[node name="EnemigoGrande" type="CharacterBody3D" unique_id=972580961 groups=["enemigo"]]
+script = ExtResource("1_redfx")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="." unique_id=1578729434]
+mesh = SubResource("BoxMesh_usgnq")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=41064292]
+shape = SubResource("BoxShape3D_usgnq")
+
+[node name="CanonEnemigo" type="Marker3D" parent="." unique_id=2122156348]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.0014727116, 4.0765095)

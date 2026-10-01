@@ -1,0 +1,34 @@
+[gd_scene format=3 uid="uid://b7ordh3rixkl5"]
+
+[ext_resource type="Script" uid="uid://cs1rrfhfx0r7j" path="res://nave.gd" id="1_16k11"]
+
+[sub_resource type="BoxMesh" id="BoxMesh_usgnq"]
+size = Vector3(1, 0.5, 2)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_usgnq"]
+size = Vector3(1, 2, 2)
+
+[sub_resource type="CapsuleMesh" id="CapsuleMesh_usgnq"]
+
+[node name="jugador" type="CharacterBody3D" unique_id=314068183 groups=["jugador"]]
+script = ExtResource("1_16k11")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="." unique_id=1097381552]
+mesh = SubResource("BoxMesh_usgnq")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=2030326131]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.73247886, 0)
+shape = SubResource("BoxShape3D_usgnq")
+
+[node name="Modelo_Personaje" type="MeshInstance3D" parent="." unique_id=1114696512]
+transform = Transform3D(0.68, 0, 0, 0, 0.68, 0, 0, 0, 0.68, 0, 0.81654096, 0.32344007)
+mesh = SubResource("CapsuleMesh_usgnq")
+
+[node name="Head" type="Node3D" parent="." unique_id=1678370423]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.0420327, 0.3132398)
+
+[node name="Camera3D" type="Camera3D" parent="Head" unique_id=1130481708]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.8943932, 3.5200408)
+
+[node name="Canon" type="Marker3D" parent="Head" unique_id=584390955]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.076301694, -0.37724483)
