@@ -1,0 +1,48 @@
+[gd_scene load_steps=7 format=3]
+
+[ext_resource type="Script" path="res://terrestre/enemigo_especial.gd" id="1"]
+
+[sub_resource type="BoxShape3D" id="Colision"]
+size = Vector3(1.7, 1.6, 1.4)
+
+[sub_resource type="StandardMaterial3D" id="Blindaje"]
+albedo_color = Color(0.16, 0.21, 0.35, 1)
+metallic = 0.7
+
+[sub_resource type="BoxMesh" id="Cuerpo"]
+material = SubResource("Blindaje")
+size = Vector3(1.7, 0.85, 1.2)
+
+[sub_resource type="StandardMaterial3D" id="Luz"]
+albedo_color = Color(1, 0.26, 0.12, 1)
+shading_mode = 0
+
+[sub_resource type="SphereMesh" id="Nucleo"]
+material = SubResource("Luz")
+radius = 0.32
+height = 0.64
+
+[node name="EnemigoEspecial" type="CharacterBody3D" groups=["enemigo", "enemigo_especial"]]
+motion_mode = 1
+script = ExtResource("1")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+shape = SubResource("Colision")
+
+[node name="Cuerpo" type="MeshInstance3D" parent="."]
+mesh = SubResource("Cuerpo")
+
+[node name="Nucleo" type="MeshInstance3D" parent="."]
+position = Vector3(0, 0, 0.65)
+mesh = SubResource("Nucleo")
+
+[node name="Canon" type="Marker3D" parent="."]
+position = Vector3(0, 0, 0.8)
+
+[node name="Estado" type="Label3D" parent="."]
+position = Vector3(0, 1.2, 0)
+billboard = 1
+font_size = 40
+pixel_size = 0.008
+text = "CENTINELA"
+outline_size = 8

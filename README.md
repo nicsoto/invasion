@@ -19,14 +19,17 @@ Ambos modos serán necesarios para avanzar. El desafío estará en decidir cuán
 
 ## Estado del proyecto
 
-Estamos en una etapa inicial de desarrollo. Este repositorio reúne la propuesta del juego y alojará su implementación en **Godot**. Por ahora, todavía no incluye código ni una versión ejecutable.
+Estamos desarrollando el prototipo del Hito 1 en **Godot**. El proyecto está en `invasion-project/` e incluye una base de combate espacial y, en esta rama, una escena de prueba de combate terrestre.
+
+Para probar el combate terrestre en Godot, abre `terrestre/demo_terrestre.tscn` y presiona **F6**. Incluye movimiento y disparos a pie, plataformas, cobertura y enemigos especiales. Consulta los [controles y la guía de integración](invasion-project/terrestre/README.md).
 
 ### Próximos pasos
 
-- [ ] Implementar el movimiento y los disparos de la nave.
-- [ ] Agregar el movimiento del personaje fuera de la nave.
+- [x] Implementar una primera versión del movimiento y los disparos de la nave.
+- [x] Agregar movimiento y disparos a pie en una escena de prueba.
 - [ ] Implementar la mecánica de entrar y salir de la nave.
-- [ ] Incorporar enemigos que requieran alternar entre ambos modos de combate.
+- [x] Crear un enemigo especial vulnerable al arma terrestre.
+- [ ] Integrar encuentros que requieran alternar entre ambos modos de combate.
 - [ ] Diseñar los niveles e integrar arte y sonido.
 
 ## Equipo
@@ -37,7 +40,7 @@ Estamos en una etapa inicial de desarrollo. Este repositorio reúne la propuesta
 - Benjamín
 - Nicolás
 
-El trabajo del equipo abarca programación, diseño de niveles, arte y sonido.
+Antonia se encarga del combate espacial, Nicolás del combate terrestre y Benjamín de la transición y el ensamblaje.
 
 ## Enlaces
 

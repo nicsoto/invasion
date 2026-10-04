@@ -1,0 +1,322 @@
+[gd_scene load_steps=28 format=3]
+
+[ext_resource type="Script" path="res://terrestre/demo_terrestre.gd" id="1"]
+[ext_resource type="PackedScene" path="res://terrestre/personaje.tscn" id="2"]
+[ext_resource type="PackedScene" path="res://terrestre/enemigo_especial.tscn" id="3"]
+
+[ext_resource type="Shader" path="res://terrestre/espacio.gdshader" id="4"]
+
+[sub_resource type="ShaderMaterial" id="CieloMaterial"]
+shader = ExtResource("4")
+
+[sub_resource type="Sky" id="Cielo"]
+sky_material = SubResource("CieloMaterial")
+
+[sub_resource type="Environment" id="Entorno"]
+background_mode = 2
+sky = SubResource("Cielo")
+background_color = Color(0.012, 0.022, 0.05, 1)
+ambient_light_source = 3
+ambient_light_color = Color(0.48, 0.63, 0.85, 1)
+ambient_light_energy = 0.65
+tonemap_mode = 2
+
+[sub_resource type="StandardMaterial3D" id="Roca"]
+albedo_color = Color(0.29, 0.33, 0.4, 1)
+roughness = 0.92
+
+[sub_resource type="StandardMaterial3D" id="Cobertura"]
+albedo_color = Color(0.39, 0.44, 0.53, 1)
+roughness = 0.9
+
+[sub_resource type="StandardMaterial3D" id="Marca"]
+albedo_color = Color(0.12, 0.85, 0.7, 1)
+shading_mode = 0
+
+[sub_resource type="CylinderMesh" id="AsteroideMesh"]
+material = SubResource("Roca")
+top_radius = 18.0
+bottom_radius = 13.0
+height = 5.0
+radial_segments = 12
+
+[sub_resource type="ConvexPolygonShape3D" id="AsteroideShape"]
+points = PackedVector3Array(0.0, 2.5, 18.0, 9.0, 2.5, 15.58846, 15.58846, 2.5, 9.0, 18.0, 2.5, 0.0, 15.58846, 2.5, -9.0, 9.0, 2.5, -15.58846, 0.0, 2.5, -18.0, -9.0, 2.5, -15.58846, -15.58846, 2.5, -9.0, -18.0, 2.5, -0.0, -15.58846, 2.5, 9.0, -9.0, 2.5, 15.58846, 0.0, -2.5, 13.0, 6.5, -2.5, 11.25833, 11.25833, -2.5, 6.5, 13.0, -2.5, 0.0, 11.25833, -2.5, -6.5, 6.5, -2.5, -11.25833, 0.0, -2.5, -13.0, -6.5, -2.5, -11.25833, -11.25833, -2.5, -6.5, -13.0, -2.5, -0.0, -11.25833, -2.5, 6.5, -6.5, -2.5, 11.25833)
+
+[sub_resource type="BoxMesh" id="LlegadaMesh"]
+material = SubResource("Marca")
+size = Vector3(3, 0.03, 3)
+
+[sub_resource type="BoxMesh" id="CoberturaIzquierdaMesh"]
+material = SubResource("Cobertura")
+size = Vector3(3, 2.5, 2)
+
+[sub_resource type="BoxShape3D" id="CoberturaIzquierdaShape"]
+size = Vector3(3, 2.5, 2)
+
+[sub_resource type="BoxMesh" id="CoberturaDerechaMesh"]
+material = SubResource("Cobertura")
+size = Vector3(3, 2.8, 2)
+
+[sub_resource type="BoxShape3D" id="CoberturaDerechaShape"]
+size = Vector3(3, 2.8, 2)
+
+[sub_resource type="BoxMesh" id="RampaMesh"]
+material = SubResource("Cobertura")
+size = Vector3(3, 0.5, 6)
+
+[sub_resource type="BoxShape3D" id="RampaShape"]
+size = Vector3(3, 0.5, 6)
+
+[sub_resource type="BoxMesh" id="EscalonBajoMesh"]
+material = SubResource("Cobertura")
+size = Vector3(3, 0.6, 3)
+
+[sub_resource type="BoxShape3D" id="EscalonBajoShape"]
+size = Vector3(3, 0.6, 3)
+
+[sub_resource type="BoxMesh" id="EscalonMedioMesh"]
+material = SubResource("Cobertura")
+size = Vector3(3, 1.3, 3)
+
+[sub_resource type="BoxShape3D" id="EscalonMedioShape"]
+size = Vector3(3, 1.3, 3)
+
+[sub_resource type="BoxMesh" id="EscalonAltoMesh"]
+material = SubResource("Cobertura")
+size = Vector3(3, 2, 3)
+
+[sub_resource type="BoxShape3D" id="EscalonAltoShape"]
+size = Vector3(3, 2, 3)
+
+[sub_resource type="BoxMesh" id="IslaSaltoMesh"]
+material = SubResource("Cobertura")
+size = Vector3(5, 3, 6)
+
+[sub_resource type="BoxShape3D" id="IslaSaltoShape"]
+size = Vector3(5, 3, 6)
+
+[node name="DemoTerrestre" type="Node3D"]
+script = ExtResource("1")
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = SubResource("Entorno")
+
+[node name="Luz" type="DirectionalLight3D" parent="."]
+rotation_degrees = Vector3(-55, -30, 0)
+light_color = Color(0.82, 0.9, 1, 1)
+light_energy = 1.5
+shadow_enabled = true
+
+[node name="Asteroide" type="StaticBody3D" parent="."]
+position = Vector3(0, -2.5, 0)
+
+[node name="Mesh" type="MeshInstance3D" parent="Asteroide"]
+mesh = SubResource("AsteroideMesh")
+
+[node name="Colision" type="CollisionShape3D" parent="Asteroide"]
+shape = SubResource("AsteroideShape")
+
+[node name="Llegada" type="MeshInstance3D" parent="."]
+position = Vector3(0, 0.02, 10)
+mesh = SubResource("LlegadaMesh")
+
+[node name="PersonajeTerrestre" parent="." instance=ExtResource("2")]
+position = Vector3(0, 0.2, 10)
+
+[node name="CentinelaA" parent="." instance=ExtResource("3")]
+position = Vector3(-1.5, 1.6, -7)
+
+[node name="CentinelaB" parent="." instance=ExtResource("3")]
+position = Vector3(8, 2, -10)
+intervalo_ataque = 2.8
+radio_patrulla = 1.5
+
+[node name="CoberturaIzquierda" type="StaticBody3D" parent="."]
+position = Vector3(-4, 1.25, 0)
+rotation_degrees = Vector3(0, -12, 0)
+
+[node name="Mesh" type="MeshInstance3D" parent="CoberturaIzquierda"]
+mesh = SubResource("CoberturaIzquierdaMesh")
+
+[node name="Colision" type="CollisionShape3D" parent="CoberturaIzquierda"]
+shape = SubResource("CoberturaIzquierdaShape")
+
+[node name="CoberturaDerecha" type="StaticBody3D" parent="."]
+position = Vector3(4, 1.4, -3)
+rotation_degrees = Vector3(0, 15, 0)
+
+[node name="Mesh" type="MeshInstance3D" parent="CoberturaDerecha"]
+mesh = SubResource("CoberturaDerechaMesh")
+
+[node name="Colision" type="CollisionShape3D" parent="CoberturaDerecha"]
+shape = SubResource("CoberturaDerechaShape")
+
+[node name="Rampa" type="StaticBody3D" parent="."]
+position = Vector3(-10, 0.7, 3)
+rotation_degrees = Vector3(18, 0, 0)
+
+[node name="Mesh" type="MeshInstance3D" parent="Rampa"]
+mesh = SubResource("RampaMesh")
+
+[node name="Colision" type="CollisionShape3D" parent="Rampa"]
+shape = SubResource("RampaShape")
+
+[node name="EscalonBajo" type="StaticBody3D" parent="."]
+position = Vector3(8, 0.3, 8)
+rotation_degrees = Vector3(0, 0, 0)
+
+[node name="Mesh" type="MeshInstance3D" parent="EscalonBajo"]
+mesh = SubResource("EscalonBajoMesh")
+
+[node name="Colision" type="CollisionShape3D" parent="EscalonBajo"]
+shape = SubResource("EscalonBajoShape")
+
+[node name="EscalonMedio" type="StaticBody3D" parent="."]
+position = Vector3(10, 0.65, 5)
+rotation_degrees = Vector3(0, 0, 0)
+
+[node name="Mesh" type="MeshInstance3D" parent="EscalonMedio"]
+mesh = SubResource("EscalonMedioMesh")
+
+[node name="Colision" type="CollisionShape3D" parent="EscalonMedio"]
+shape = SubResource("EscalonMedioShape")
+
+[node name="EscalonAlto" type="StaticBody3D" parent="."]
+position = Vector3(11, 1, 2)
+rotation_degrees = Vector3(0, 0, 0)
+
+[node name="Mesh" type="MeshInstance3D" parent="EscalonAlto"]
+mesh = SubResource("EscalonAltoMesh")
+
+[node name="Colision" type="CollisionShape3D" parent="EscalonAlto"]
+shape = SubResource("EscalonAltoShape")
+
+[node name="IslaSalto" type="StaticBody3D" parent="."]
+position = Vector3(23, -0.5, 0)
+rotation_degrees = Vector3(0, 0, 0)
+
+[node name="Mesh" type="MeshInstance3D" parent="IslaSalto"]
+mesh = SubResource("IslaSaltoMesh")
+
+[node name="Colision" type="CollisionShape3D" parent="IslaSalto"]
+shape = SubResource("IslaSaltoShape")
+
+[node name="HUD" type="CanvasLayer" parent="."]
+
+[node name="Cabecera" type="ColorRect" parent="HUD"]
+anchors_preset = 10
+anchor_right = 1.0
+offset_bottom = 114.0
+mouse_filter = 2
+color = Color(0.025, 0.04, 0.07, 0.9)
+
+[node name="Margen" type="MarginContainer" parent="HUD"]
+anchor_right = 1.0
+offset_left = 24.0
+offset_top = 14.0
+offset_right = -270.0
+offset_bottom = 100.0
+mouse_filter = 2
+
+[node name="Columna" type="VBoxContainer" parent="HUD/Margen"]
+layout_mode = 2
+mouse_filter = 2
+
+[node name="Titulo" type="Label" parent="HUD/Margen/Columna"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.32, 0.96, 0.77, 1)
+theme_override_font_sizes/font_size = 24
+text = "INVASION  /  COMBATE TERRESTRE"
+
+[node name="Objetivo" type="Label" parent="HUD/Margen/Columna"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 16
+text = "Destruye los centinelas con el arma a pie."
+
+[node name="Consejo" type="Label" parent="HUD/Margen/Columna"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.7, 0.78, 0.9, 1)
+theme_override_font_sizes/font_size = 14
+text = "Su blindaje resiste el arma de la nave. Muévete y usa las rocas como cobertura."
+
+[node name="Vida" type="VBoxContainer" parent="HUD"]
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -240.0
+offset_top = 24.0
+offset_right = -24.0
+offset_bottom = 88.0
+grow_horizontal = 0
+mouse_filter = 2
+
+[node name="Texto" type="Label" parent="HUD/Vida"]
+layout_mode = 2
+text = "SALUD  100 / 100"
+horizontal_alignment = 2
+
+[node name="Barra" type="ProgressBar" parent="HUD/Vida"]
+custom_minimum_size = Vector2(0, 16)
+layout_mode = 2
+mouse_filter = 2
+value = 100.0
+show_percentage = false
+
+[node name="Pie" type="ColorRect" parent="HUD"]
+anchors_preset = 12
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_top = -60.0
+grow_vertical = 0
+mouse_filter = 2
+color = Color(0.025, 0.04, 0.07, 0.9)
+
+[node name="Controles" type="Label" parent="HUD"]
+anchors_preset = 12
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 24.0
+offset_top = -52.0
+offset_right = -24.0
+offset_bottom = -8.0
+grow_vertical = 0
+theme_override_font_sizes/font_size = 15
+text = "WASD  Moverse    ·    Mouse  Apuntar    ·    Clic izq.  Disparar    ·    Espacio  Saltar
+Shift  Correr    ·    Esc  Pausa    ·    R  Reiniciar"
+vertical_alignment = 1
+
+[node name="Mira" type="Label" parent="HUD"]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -20.0
+offset_top = -20.0
+offset_right = 20.0
+offset_bottom = 20.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_font_sizes/font_size = 30
+text = "+"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Velo" type="ColorRect" parent="HUD"]
+visible = false
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+mouse_filter = 2
+color = Color(0.01, 0.02, 0.04, 0.8)
+
+[node name="Mensaje" type="Label" parent="HUD"]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+theme_override_font_sizes/font_size = 26
+horizontal_alignment = 1
+vertical_alignment = 1
