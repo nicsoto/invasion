@@ -1,0 +1,6 @@
+[gd_scene format=3 uid="uid://cmvj23h5gwc1l"]
+
+[ext_resource type="Script" uid="uid://bsudbjde8e6m" path="res://spawner_asteroides.gd" id="1_2mdpd"]
+
+[node name="SpawnerAsteroides" type="Node3D" unique_id=1473351785]
+script = ExtResource("1_2mdpd")

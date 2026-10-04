@@ -11,6 +11,7 @@ size = Vector3(1, 2, 2)
 [sub_resource type="CapsuleMesh" id="CapsuleMesh_usgnq"]
 
 [node name="jugador" type="CharacterBody3D" unique_id=314068183 groups=["jugador"]]
+process_mode = 3
 script = ExtResource("1_16k11")
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="." unique_id=1097381552]
@@ -32,3 +33,98 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.8943932, 3.5200408)
 
 [node name="Canon" type="Marker3D" parent="Head" unique_id=584390955]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.076301694, -0.37724483)
+
+[node name="HUD" type="CanvasLayer" parent="." unique_id=1807847452]
+
+[node name="BarraSalud" type="ProgressBar" parent="HUD" unique_id=1203609974]
+offset_left = 288.0
+offset_top = 568.0
+offset_right = 588.0
+offset_bottom = 595.0
+scale = Vector2(2, 2)
+size_flags_stretch_ratio = 0.0
+theme_override_font_sizes/font_size = 18
+value = 100.0
+
+[node name="MenuPausa" type="ColorRect" parent="HUD" unique_id=738454173]
+process_mode = 3
+visible = false
+offset_right = 39.7
+offset_bottom = 22.3
+scale = Vector2(29, 29)
+color = Color(0, 0, 0, 0.31764707)
+
+[node name="Label" type="Label" parent="HUD/MenuPausa" unique_id=544686992]
+layout_mode = 0
+offset_left = 4.1379313
+offset_top = 0.2758621
+offset_right = 256.13794
+offset_bottom = 138.27586
+scale = Vector2(0.12676004, 0.15386724)
+theme_override_font_sizes/font_size = 31
+text = "JUEGO PAUSADO
+
+"
+horizontal_alignment = 1
+
+[node name="Label2" type="Label" parent="HUD/MenuPausa" unique_id=920297501]
+layout_mode = 0
+offset_left = 6.62069
+offset_top = 3.5862067
+offset_right = 314.6207
+offset_bottom = 470.5862
+scale = Vector2(0.0786376, 0.043396804)
+theme_override_font_sizes/font_size = 31
+text = "
+CONTROLES:
+Pausar/Despausar: E
+Moverse: WASD
+Sprint: W+W
+Disparar: Left Click
+Ascender: Space bar
+Descender: Q
+
+"
+horizontal_alignment = 1
+
+[node name="MenuMuerte" type="ColorRect" parent="HUD" unique_id=554969073]
+process_mode = 3
+visible = false
+offset_right = 39.7
+offset_bottom = 22.3
+scale = Vector2(29, 29)
+color = Color(0.29411766, 0.05882353, 0, 0.56078434)
+
+[node name="Label" type="Label" parent="HUD/MenuMuerte" unique_id=2096562113]
+layout_mode = 0
+offset_left = 1.1034484
+offset_top = 5.5172415
+offset_right = 223.10345
+offset_bottom = 54.517242
+scale = Vector2(0.17069687, 0.18851489)
+theme_override_font_sizes/font_size = 35
+text = "Estás Muerto"
+horizontal_alignment = 1
+
+[node name="BotonJugar" type="Button" parent="HUD/MenuMuerte" unique_id=378384829]
+layout_mode = 0
+offset_left = 12.965517
+offset_top = 14.068965
+offset_right = 294.9655
+offset_bottom = 64.06896
+scale = Vector2(0.05034418, 0.060852285)
+theme_override_font_sizes/font_size = 30
+text = "Inténtalo de nuevo"
+
+[node name="BotonSalir" type="Button" parent="HUD/MenuMuerte" unique_id=210080776]
+layout_mode = 0
+offset_left = 18.48276
+offset_top = 18.48276
+offset_right = 96.48276
+offset_bottom = 72.48276
+scale = Vector2(0.06087108, 0.05603438)
+theme_override_font_sizes/font_size = 33
+text = "Salir"
+
+[connection signal="pressed" from="HUD/MenuMuerte/BotonJugar" to="." method="_on_boton_jugar_pressed"]
+[connection signal="pressed" from="HUD/MenuMuerte/BotonSalir" to="." method="_on_boton_salir_pressed"]

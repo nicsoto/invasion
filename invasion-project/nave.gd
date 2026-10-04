@@ -3,6 +3,7 @@ extends CharacterBody3D
 var bala_escena = preload("res://bala.tscn")
 var esta_activa = true
 var can_shoot = true
+var salud = 100
 
 
 var vel_normal = 20.0
@@ -13,17 +14,34 @@ var vel_actual = 20.0
 var tiempo_ultimo_w = 0.0
 var esta_sprinteando = false
 
-var salud = 100
-
 var sensibilidad = 0.004
+
+@onready var menu_muerte = $HUD/MenuMuerte
+
 @onready var head = $Head
 @onready var canon = $Head/Canon
 
+@onready var barra_salud = $HUD/BarraSalud
+@onready var menu_pausa = $HUD/MenuPausa
 func _ready():
 	Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
 
 func _unhandled_input(event):
-	if not esta_activa: return
+	if not esta_activa:
+		return
+	if event.is_action_pressed("ui_cancel"):
+		get_tree().quit()
+	if event.is_action_pressed("Pausa"):
+		var esta_pausado = not get_tree().paused
+		get_tree().paused = esta_pausado
+		menu_pausa.visible = esta_pausado
+		
+		if esta_pausado:
+			Input.set_mouse_mode(Input.MOUSE_MODE_VISIBLE)
+		else: 
+			Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
+	if get_tree().paused:
+		return
 	
 	
 	if event is InputEventMouseMotion:
@@ -42,6 +60,7 @@ func _unhandled_input(event):
 		esta_sprinteando = false
 
 func _physics_process(delta):
+	if get_tree().paused: return
 	if not esta_activa: return
 
 	vel_actual = vel_sprint if esta_sprinteando else vel_normal
@@ -79,6 +98,24 @@ func disparar():
 	can_shoot = true
 	
 func take_damage(cantidad):
+	if salud <=0:
+		return
 	salud -= cantidad
-	print("Salud restante: ", salud)
+	barra_salud.value= salud
 	
+	if salud <= 0:
+		get_tree().paused = true
+		menu_muerte.visible = true
+		Input.set_mouse_mode(Input.MOUSE_MODE_VISIBLE)
+		
+	
+	
+
+
+func _on_boton_jugar_pressed() -> void:
+	get_tree().paused = false
+	get_tree().reload_current_scene()
+
+
+func _on_boton_salir_pressed() -> void:
+	get_tree().quit()

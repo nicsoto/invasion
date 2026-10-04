@@ -1,5 +1,6 @@
 extends CharacterBody3D
 
+
 var salud = 100
 var velocidad = 8.0
 var jugador = null
@@ -7,6 +8,8 @@ var bala_escena = preload("res://bala.tscn")
 
 var tiempo_disparo = 0.0 
 @onready var canon = $CanonEnemigo
+
+@onready var barra_vida_3d = $BarraVida3D
 
 func _ready():
 	jugador = get_tree().get_first_node_in_group("jugador")
@@ -40,5 +43,9 @@ func disparar():
 
 func take_damage(cantidad):
 	salud -= cantidad
+	
+	barra_vida_3d.scale.x = salud / 100.0
+	if salud <= 30:
+		barra_vida_3d.get_active_material(0).albedo_color = Color.RED
 	if salud <= 0:
 		queue_free()
