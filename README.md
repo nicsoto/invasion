@@ -4,6 +4,8 @@ Videojuego en desarrollo de **Trigger Games**, creado como proyecto del curso **
 
 ## La idea
 
+Esta propuesta está descrita en el [devlog inicial del equipo](https://yuu729.itch.io/ultimate-space-shooter-hito-0/devlog/1658441/project-invasion-release).
+
 Un alienígena del planeta **0909** se enfrenta a los **exodials**, los invasores de su mundo. A bordo de su nave, busca llegar a la base enemiga para vengar a su planeta y evitar una nueva invasión.
 
 Pero no todos los enfrentamientos se pueden resolver desde la cabina: algunas naves enemigas son pequeñas y veloces, y usan planetas y asteroides como cobertura. Para combatirlas, el protagonista deberá abandonar su nave y atacar a pie desde las superficies cercanas.
@@ -41,6 +43,17 @@ Para probar el combate terrestre en Godot, abre `terrestre/demo_terrestre.tscn` 
 - Nicolás
 
 Antonia se encarga del combate espacial, Nicolás del combate terrestre y Benjamín de la transición y el ensamblaje.
+
+## Ramas de trabajo
+
+| Rama | Responsabilidad |
+| --- | --- |
+| `main` | Versión compartida para presentar, después de integrar y probar los avances. |
+| `combate-espacial` | Antonia: nave, vuelo, disparos, enemigos y daño espacial. |
+| `combate-terrestre` | Nicolás: personaje, movimiento y disparos a pie, plataformas y enemigos terrestres. |
+| `integracion` | Benjamín: transición entre modos, cámaras, HUD y ensamblaje de las escenas. |
+
+`integracion` parte de la versión que ya reúne el combate espacial actualizado y el prototipo terrestre. Las ramas contienen el proyecto completo; sus nombres indican el trabajo que se desarrolla en cada una.
 
 ## Enlaces
 
