@@ -1,0 +1,31 @@
+[gd_scene format=3 uid="uid://cnbg2jdnu0rf5"]
+
+[ext_resource type="Script" uid="uid://cr3g3dgm8kg7x" path="res://bala.gd" id="1_jk513"]
+
+[sub_resource type="BoxMesh" id="BoxMesh_usgnq"]
+size = Vector3(0.2, 0.2, 0.8)
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_usgnq"]
+gravity = Vector3(0, 0, 0)
+
+[sub_resource type="BoxMesh" id="BoxMesh_eg8xt"]
+size = Vector3(0.1, 0.1, 0.1)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_usgnq"]
+size = Vector3(0.2, 0.2, 0.8)
+
+[node name="Bala" type="Area3D" unique_id=363665596]
+script = ExtResource("1_jk513")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="." unique_id=773461391]
+mesh = SubResource("BoxMesh_usgnq")
+
+[node name="GPUParticles3D" type="GPUParticles3D" parent="." unique_id=1615294599]
+process_material = SubResource("ParticleProcessMaterial_usgnq")
+draw_pass_1 = SubResource("BoxMesh_eg8xt")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=205562071]
+shape = SubResource("BoxShape3D_usgnq")
+
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]
+[connection signal="body_shape_entered" from="." to="." method="_on_body_shape_entered"]
