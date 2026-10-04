@@ -5,7 +5,7 @@ var tiempo_spawn = 0.0
 
 func _process(delta):
 	tiempo_spawn += delta
-	if tiempo_spawn >= 5.0:
+	if tiempo_spawn >= 8.0:
 		tiempo_spawn = 0.0
 		
 		var nuevo_enemigo = enemigo_escena.instantiate()

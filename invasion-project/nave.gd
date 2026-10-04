@@ -60,6 +60,7 @@ func _unhandled_input(event):
 		esta_sprinteando = false
 
 func _physics_process(delta):
+	if get_tree().paused: return
 	if not esta_activa: return
 
 	vel_actual = vel_sprint if esta_sprinteando else vel_normal

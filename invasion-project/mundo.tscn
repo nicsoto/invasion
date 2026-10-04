@@ -1,14 +1,15 @@
 [gd_scene format=3 uid="uid://he4q72xsnfy1"]
 
 [ext_resource type="PackedScene" uid="uid://b7ordh3rixkl5" path="res://jugador.tscn" id="1_lgngo"]
+[ext_resource type="Texture2D" uid="uid://bee1k6eksheio" path="res://HDR_multi_nebulae_1.hdr" id="1_otwa2"]
 [ext_resource type="PackedScene" uid="uid://dyoaaf6dc3pbc" path="res://spawner.tscn" id="2_fw4w5"]
+[ext_resource type="PackedScene" uid="uid://cmvj23h5gwc1l" path="res://spawner_asteroides.tscn" id="3_fw4w5"]
 
-[sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_40yku"]
-sky_horizon_color = Color(0.66224277, 0.6717428, 0.6867428, 1)
-ground_horizon_color = Color(0.66224277, 0.6717428, 0.6867428, 1)
+[sub_resource type="PanoramaSkyMaterial" id="PanoramaSkyMaterial_eg8xt"]
+panorama = ExtResource("1_otwa2")
 
 [sub_resource type="Sky" id="Sky_wlb8w"]
-sky_material = SubResource("ProceduralSkyMaterial_40yku")
+sky_material = SubResource("PanoramaSkyMaterial_eg8xt")
 
 [sub_resource type="Environment" id="Environment_giwcb"]
 background_mode = 2
@@ -25,6 +26,8 @@ transform = Transform3D(-0.8660254, -0.43301278, 0.25, 0, 0.49999997, 0.86602545
 shadow_enabled = true
 
 [node name="jugador" parent="." unique_id=314068183 instance=ExtResource("1_lgngo")]
+
+[node name="SpawnerAsteroides" parent="." unique_id=1473351785 instance=ExtResource("3_fw4w5")]
 
 [node name="Spawner" parent="." unique_id=1351663927 instance=ExtResource("2_fw4w5")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -3.6980705)

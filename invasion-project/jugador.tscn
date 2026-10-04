@@ -11,6 +11,7 @@ size = Vector3(1, 2, 2)
 [sub_resource type="CapsuleMesh" id="CapsuleMesh_usgnq"]
 
 [node name="jugador" type="CharacterBody3D" unique_id=314068183 groups=["jugador"]]
+process_mode = 3
 script = ExtResource("1_16k11")
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="." unique_id=1097381552]
