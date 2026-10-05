@@ -35,6 +35,20 @@ cobertura. Cada uno tiene 100 de salud y necesita cuatro impactos de 25.
 La mira cambia al acertar. La demo muestra la salud, el objetivo y los controles.
 Caer al vacío o perder toda la salud termina el intento; R permite repetirlo.
 
+## Estética de Hito 0
+
+La escena usa la nebulosa verde, el alienígena, el arma de colores y las rocas
+del juego de referencia `Hito0-space shooter.exe`. Se añadieron planetas verdes
+decorativos, centinelas de formas angulares con núcleo luminoso y una interfaz
+negra con detalles verde lima. El núcleo de cada centinela cambia a naranja al
+avisar un ataque y a cian al bloquear un disparo espacial.
+
+El personaje tiene el modelo original en pose fija; las animaciones quedan
+pendientes. Las coberturas de roca conservan colisiones de caja simplificadas.
+Los controles, el daño y las señales de integración siguen siendo los del
+prototipo terrestre. Los recursos y sus adaptaciones están documentados en
+[arte/hito0/README.md](arte/hito0/README.md).
+
 ## Qué está implementado
 
 - Movimiento en primera persona, aceleración, carrera y salto con una pequeña
@@ -109,8 +123,8 @@ para el prototipo, no un detector automático de si el atacante está dentro de 
 nave. El centinela busca el grupo `personaje_terrestre`; no persigue ni ataca naves.
 
 La escena de prueba usa la capa física 1, igual que las escenas actuales. La capa
-visual 2 del cuerpo del personaje se excluye de su cámara para no mostrar la
-cápsula desde dentro. Los trazos se liberan tras 0.07 segundos.
+visual 2 del cuerpo del personaje se excluye de su cámara para no mostrar el
+modelo desde dentro. Los trazos se liberan tras 0.07 segundos.
 
 ## Pruebas
 

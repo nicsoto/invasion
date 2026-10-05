@@ -1,4 +1,4 @@
-[gd_scene load_steps=7 format=3]
+[gd_scene load_steps=9 format=3]
 
 [ext_resource type="Script" path="res://terrestre/enemigo_especial.gd" id="1"]
 
@@ -6,21 +6,36 @@
 size = Vector3(1.7, 1.6, 1.4)
 
 [sub_resource type="StandardMaterial3D" id="Blindaje"]
-albedo_color = Color(0.16, 0.21, 0.35, 1)
-metallic = 0.7
+albedo_color = Color(0.12, 0.3, 0.22, 1)
+metallic = 0.2
+roughness = 0.45
 
-[sub_resource type="BoxMesh" id="Cuerpo"]
+[sub_resource type="CylinderMesh" id="Cuerpo"]
 material = SubResource("Blindaje")
-size = Vector3(1.7, 0.85, 1.2)
+top_radius = 0.45
+bottom_radius = 0.85
+height = 0.65
+radial_segments = 6
+
+[sub_resource type="StandardMaterial3D" id="AlasMaterial"]
+albedo_color = Color(0.28, 0.68, 0.49, 1)
+roughness = 0.4
+
+[sub_resource type="BoxMesh" id="Ala"]
+material = SubResource("AlasMaterial")
+size = Vector3(0.8, 0.16, 1.0)
 
 [sub_resource type="StandardMaterial3D" id="Luz"]
-albedo_color = Color(1, 0.26, 0.12, 1)
+resource_local_to_scene = true
+albedo_color = Color(0.45, 1, 0.025, 1)
 shading_mode = 0
 
 [sub_resource type="SphereMesh" id="Nucleo"]
 material = SubResource("Luz")
 radius = 0.32
 height = 0.64
+radial_segments = 12
+rings = 6
 
 [node name="EnemigoEspecial" type="CharacterBody3D" groups=["enemigo", "enemigo_especial"]]
 motion_mode = 1
@@ -31,6 +46,16 @@ shape = SubResource("Colision")
 
 [node name="Cuerpo" type="MeshInstance3D" parent="."]
 mesh = SubResource("Cuerpo")
+
+[node name="AlaIzquierda" type="MeshInstance3D" parent="."]
+position = Vector3(-0.55, 0, 0)
+rotation_degrees = Vector3(0, -20, -18)
+mesh = SubResource("Ala")
+
+[node name="AlaDerecha" type="MeshInstance3D" parent="."]
+position = Vector3(0.55, 0, 0)
+rotation_degrees = Vector3(0, 20, 18)
+mesh = SubResource("Ala")
 
 [node name="Nucleo" type="MeshInstance3D" parent="."]
 position = Vector3(0, 0, 0.65)

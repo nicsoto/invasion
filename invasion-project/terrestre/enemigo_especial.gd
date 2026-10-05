@@ -26,6 +26,7 @@ var _flash := 0.0
 @onready var canon: Marker3D = $Canon
 @onready var etiqueta: Label3D = $Estado
 @onready var nucleo: MeshInstance3D = $Nucleo
+@onready var _luz_nucleo: StandardMaterial3D = nucleo.get_active_material(0)
 
 func _ready() -> void:
 	salud = salud_maxima
@@ -95,11 +96,14 @@ func recibir_disparo_terrestre(cantidad: int) -> bool:
 func _actualizar_estado() -> void:
 	if _flash > 0:
 		etiqueta.text = "BLINDAJE ESPACIAL"
-		etiqueta.modulate = Color(0.4, 0.8, 1)
+		etiqueta.modulate = Color(0.25, 0.9, 1)
+		_luz_nucleo.albedo_color = Color(0.25, 0.9, 1)
 	elif _aviso > 0:
 		etiqueta.text = "¡BUSCA COBERTURA!"
 		etiqueta.modulate = Color(1, 0.5, 0.2)
+		_luz_nucleo.albedo_color = Color(1, 0.25, 0.08)
 	else:
 		etiqueta.text = "CENTINELA  %d / %d" % [salud, salud_maxima]
-		etiqueta.modulate = Color(0.8, 0.9, 1)
+		etiqueta.modulate = Color(0.75, 1, 0.6)
+		_luz_nucleo.albedo_color = Color(0.45, 1, 0.025)
 	nucleo.scale = Vector3.ONE * (1.25 if _aviso > 0 else 1.0)

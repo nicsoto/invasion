@@ -1,0 +1,168 @@
+[gd_scene load_steps=5 format=3]
+
+[ext_resource type="ArrayMesh" path="res://terrestre/arte/hito0/roca.res" id="1"]
+
+[sub_resource type="StandardMaterial3D" id="PlanetaMaterial"]
+albedo_color = Color(0.12, 0.8, 0.005, 1)
+emission_enabled = true
+emission = Color(0.07, 0.5, 0.005, 1)
+emission_energy_multiplier = 0.35
+roughness = 1.0
+
+[sub_resource type="SphereMesh" id="PlanetaMesh"]
+material = SubResource("PlanetaMaterial")
+radius = 1.0
+height = 2.0
+radial_segments = 32
+rings = 16
+
+[sub_resource type="StandardMaterial3D" id="PlanetaLejanoMaterial"]
+albedo_color = Color(0.25, 1, 0.005, 1)
+shading_mode = 0
+
+[node name="Ambientacion" type="Node3D"]
+
+[node name="Roca01" type="MeshInstance3D" parent="."]
+position = Vector3(0.000, 12.969, 49.268)
+rotation_degrees = Vector3(-94.79, 94.67, -75.88)
+scale = Vector3(3.391, 3.391, 3.391)
+mesh = ExtResource("1")
+cast_shadow = 0
+
+[node name="Roca02" type="MeshInstance3D" parent="."]
+position = Vector3(19.455, 1.538, 53.451)
+rotation_degrees = Vector3(-94.67, 43.19, 108.41)
+scale = Vector3(5.474, 5.474, 5.474)
+mesh = ExtResource("1")
+cast_shadow = 0
+
+[node name="Roca03" type="MeshInstance3D" parent="."]
+position = Vector3(52.970, 5.193, 63.127)
+rotation_degrees = Vector3(-39.85, -95.63, 102.32)
+scale = Vector3(2.225, 2.225, 2.225)
+mesh = ExtResource("1")
+cast_shadow = 0
+
+[node name="Roca04" type="MeshInstance3D" parent="."]
+position = Vector3(55.195, 17.915, 31.867)
+rotation_degrees = Vector3(28.19, -48.10, -132.61)
+scale = Vector3(2.158, 2.158, 2.158)
+mesh = ExtResource("1")
+cast_shadow = 0
+
+[node name="Roca05" type="MeshInstance3D" parent="."]
+position = Vector3(79.545, -10.716, 14.026)
+rotation_degrees = Vector3(63.76, -130.83, -75.03)
+scale = Vector3(2.935, 2.935, 2.935)
+mesh = ExtResource("1")
+cast_shadow = 0
+
+[node name="Roca06" type="MeshInstance3D" parent="."]
+position = Vector3(74.370, -17.353, -13.113)
+rotation_degrees = Vector3(6.06, 58.55, -127.41)
+scale = Vector3(2.922, 2.922, 2.922)
+mesh = ExtResource("1")
+cast_shadow = 0
+
+[node name="Roca07" type="MeshInstance3D" parent="."]
+position = Vector3(58.677, -17.612, -33.877)
+rotation_degrees = Vector3(-56.81, -107.79, -89.27)
+scale = Vector3(2.451, 2.451, 2.451)
+mesh = ExtResource("1")
+cast_shadow = 0
+
+[node name="Roca08" type="MeshInstance3D" parent="."]
+position = Vector3(48.444, 3.800, -57.733)
+rotation_degrees = Vector3(-37.87, -79.57, -82.34)
+scale = Vector3(2.065, 2.065, 2.065)
+mesh = ExtResource("1")
+cast_shadow = 0
+
+[node name="Roca09" type="MeshInstance3D" parent="."]
+position = Vector3(23.670, -17.106, -65.033)
+rotation_degrees = Vector3(-4.08, 126.27, -61.45)
+scale = Vector3(3.769, 3.769, 3.769)
+mesh = ExtResource("1")
+cast_shadow = 0
+
+[node name="Roca10" type="MeshInstance3D" parent="."]
+position = Vector3(0.000, 13.816, -48.627)
+rotation_degrees = Vector3(18.99, -145.62, -158.10)
+scale = Vector3(2.541, 2.541, 2.541)
+mesh = ExtResource("1")
+cast_shadow = 0
+
+[node name="Roca11" type="MeshInstance3D" parent="."]
+position = Vector3(-28.823, -5.532, -79.190)
+rotation_degrees = Vector3(104.19, -64.58, 163.26)
+scale = Vector3(3.424, 3.424, 3.424)
+mesh = ExtResource("1")
+cast_shadow = 0
+
+[node name="Roca12" type="MeshInstance3D" parent="."]
+position = Vector3(-39.676, -16.750, -47.283)
+rotation_degrees = Vector3(65.55, -133.11, -80.55)
+scale = Vector3(3.084, 3.084, 3.084)
+mesh = ExtResource("1")
+cast_shadow = 0
+
+[node name="Roca13" type="MeshInstance3D" parent="."]
+position = Vector3(-52.919, 18.238, -30.553)
+rotation_degrees = Vector3(32.62, 112.59, -94.06)
+scale = Vector3(3.212, 3.212, 3.212)
+mesh = ExtResource("1")
+cast_shadow = 0
+
+[node name="Roca14" type="MeshInstance3D" parent="."]
+position = Vector3(-77.121, -14.288, -13.598)
+rotation_degrees = Vector3(23.28, -153.51, -171.25)
+scale = Vector3(4.602, 4.602, 4.602)
+mesh = ExtResource("1")
+cast_shadow = 0
+
+[node name="Roca15" type="MeshInstance3D" parent="."]
+position = Vector3(-71.346, 0.357, 12.580)
+rotation_degrees = Vector3(85.10, -74.52, -32.96)
+scale = Vector3(4.908, 4.908, 4.908)
+mesh = ExtResource("1")
+cast_shadow = 0
+
+[node name="Roca16" type="MeshInstance3D" parent="."]
+position = Vector3(-64.250, 9.170, 37.095)
+rotation_degrees = Vector3(51.30, 61.50, -138.73)
+scale = Vector3(4.052, 4.052, 4.052)
+mesh = ExtResource("1")
+cast_shadow = 0
+
+[node name="Roca17" type="MeshInstance3D" parent="."]
+position = Vector3(-40.075, -7.458, 47.759)
+rotation_degrees = Vector3(-82.02, -76.36, -149.38)
+scale = Vector3(2.927, 2.927, 2.927)
+mesh = ExtResource("1")
+cast_shadow = 0
+
+[node name="Roca18" type="MeshInstance3D" parent="."]
+position = Vector3(-16.914, -1.959, 46.472)
+rotation_degrees = Vector3(-59.32, -58.49, -1.94)
+scale = Vector3(2.953, 2.953, 2.953)
+mesh = ExtResource("1")
+cast_shadow = 0
+
+[node name="PlanetaIzquierdo" type="MeshInstance3D" parent="."]
+position = Vector3(-60, 18, -95)
+scale = Vector3(23, 23, 23)
+mesh = SubResource("PlanetaMesh")
+cast_shadow = 0
+
+[node name="PlanetaDerecho" type="MeshInstance3D" parent="."]
+position = Vector3(90, 28, -145)
+scale = Vector3(26, 26, 26)
+mesh = SubResource("PlanetaMesh")
+cast_shadow = 0
+
+[node name="PlanetaLejano" type="MeshInstance3D" parent="."]
+position = Vector3(0, 48, -220)
+scale = Vector3(18, 18, 18)
+mesh = SubResource("PlanetaMesh")
+cast_shadow = 0
+material_override = SubResource("PlanetaLejanoMaterial")
