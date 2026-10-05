@@ -20,6 +20,7 @@ var sensibilidad = 0.004
 
 @onready var head = $Head
 @onready var canon = $Head/Canon
+@onready var camara = $Head/Camera3D
 
 @onready var barra_salud = $HUD/BarraSalud
 @onready var menu_pausa = $HUD/MenuPausa
@@ -27,8 +28,6 @@ func _ready():
 	Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
 
 func _unhandled_input(event):
-	if not esta_activa:
-		return
 	if event.is_action_pressed("ui_cancel"):
 		get_tree().quit()
 	if event.is_action_pressed("Pausa"):
@@ -42,7 +41,8 @@ func _unhandled_input(event):
 			Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
 	if get_tree().paused:
 		return
-	
+	if not esta_activa:
+		return
 	
 	if event is InputEventMouseMotion:
 		rotate_y(-event.relative.x * sensibilidad)
@@ -98,15 +98,33 @@ func disparar():
 	can_shoot = true
 	
 func take_damage(cantidad):
+	if not esta_activa:
+		return
 	if salud <=0:
 		return
 	salud -= cantidad
 	barra_salud.value= salud
 	
 	if salud <= 0:
-		get_tree().paused = true
-		menu_muerte.visible = true
-		Input.set_mouse_mode(Input.MOUSE_MODE_VISIBLE)
+		mostrar_menu_muerte()
+
+func mostrar_menu_muerte():
+	get_tree().paused = true
+	menu_muerte.visible = true
+	Input.set_mouse_mode(Input.MOUSE_MODE_VISIBLE)
+
+func set_activa(valor: bool):
+	esta_activa = valor
+	velocity = Vector3.ZERO
+	esta_sprinteando = false
+	barra_salud.visible = valor
+	if valor:
+		add_to_group("jugador")
+		camara.make_current()
+		Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
+	else:
+		remove_from_group("jugador")
+		camara.current = false
 		
 	
 	
