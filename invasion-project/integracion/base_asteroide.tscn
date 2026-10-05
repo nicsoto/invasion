@@ -1,0 +1,188 @@
+[gd_scene format=3]
+
+[ext_resource type="PackedScene" path="res://terrestre/enemigo_especial.tscn" id="3"]
+
+[ext_resource type="ArrayMesh" path="res://terrestre/arte/hito0/roca.res" id="6"]
+
+[sub_resource type="StandardMaterial3D" id="Roca"]
+albedo_color = Color(0.49, 0.69, 0.6, 1)
+roughness = 0.92
+
+[sub_resource type="StandardMaterial3D" id="Cobertura"]
+albedo_color = Color(0.59, 0.79, 0.69, 1)
+roughness = 0.9
+
+[sub_resource type="StandardMaterial3D" id="Marca"]
+albedo_color = Color(0.45, 1, 0.025, 1)
+shading_mode = 0
+
+[sub_resource type="CylinderMesh" id="AsteroideMesh"]
+material = SubResource("Roca")
+top_radius = 18.0
+bottom_radius = 13.0
+height = 5.0
+radial_segments = 12
+
+[sub_resource type="ConvexPolygonShape3D" id="AsteroideShape"]
+points = PackedVector3Array(0.0, 2.5, 18.0, 9.0, 2.5, 15.58846, 15.58846, 2.5, 9.0, 18.0, 2.5, 0.0, 15.58846, 2.5, -9.0, 9.0, 2.5, -15.58846, 0.0, 2.5, -18.0, -9.0, 2.5, -15.58846, -15.58846, 2.5, -9.0, -18.0, 2.5, -0.0, -15.58846, 2.5, 9.0, -9.0, 2.5, 15.58846, 0.0, -2.5, 13.0, 6.5, -2.5, 11.25833, 11.25833, -2.5, 6.5, 13.0, -2.5, 0.0, 11.25833, -2.5, -6.5, 6.5, -2.5, -11.25833, 0.0, -2.5, -13.0, -6.5, -2.5, -11.25833, -11.25833, -2.5, -6.5, -13.0, -2.5, -0.0, -11.25833, -2.5, 6.5, -6.5, -2.5, 11.25833)
+
+[sub_resource type="BoxMesh" id="LlegadaMesh"]
+material = SubResource("Marca")
+size = Vector3(3, 0.03, 3)
+
+[sub_resource type="BoxShape3D" id="CoberturaIzquierdaShape"]
+size = Vector3(3, 2.5, 2)
+
+[sub_resource type="BoxShape3D" id="CoberturaDerechaShape"]
+size = Vector3(3, 2.8, 2)
+
+[sub_resource type="BoxMesh" id="RampaMesh"]
+material = SubResource("Cobertura")
+size = Vector3(3, 0.5, 6)
+
+[sub_resource type="BoxShape3D" id="RampaShape"]
+size = Vector3(3, 0.5, 6)
+
+[sub_resource type="BoxMesh" id="EscalonBajoMesh"]
+material = SubResource("Cobertura")
+size = Vector3(3, 0.6, 3)
+
+[sub_resource type="BoxShape3D" id="EscalonBajoShape"]
+size = Vector3(3, 0.6, 3)
+
+[sub_resource type="BoxMesh" id="EscalonMedioMesh"]
+material = SubResource("Cobertura")
+size = Vector3(3, 1.3, 3)
+
+[sub_resource type="BoxShape3D" id="EscalonMedioShape"]
+size = Vector3(3, 1.3, 3)
+
+[sub_resource type="BoxMesh" id="EscalonAltoMesh"]
+material = SubResource("Cobertura")
+size = Vector3(3, 2, 3)
+
+[sub_resource type="BoxShape3D" id="EscalonAltoShape"]
+size = Vector3(3, 2, 3)
+
+[sub_resource type="BoxMesh" id="IslaSaltoMesh"]
+material = SubResource("Cobertura")
+size = Vector3(5, 3, 6)
+
+[sub_resource type="BoxShape3D" id="IslaSaltoShape"]
+size = Vector3(5, 3, 6)
+
+[node name="BaseAsteroide" type="Node3D"]
+
+[node name="Asteroide" type="StaticBody3D" parent="."]
+position = Vector3(0, -2.5, 0)
+
+[node name="Mesh" type="MeshInstance3D" parent="Asteroide"]
+mesh = SubResource("AsteroideMesh")
+
+[node name="Colision" type="CollisionShape3D" parent="Asteroide"]
+shape = SubResource("AsteroideShape")
+
+[node name="Llegada" type="MeshInstance3D" parent="."]
+position = Vector3(0, 0.02, 10)
+mesh = SubResource("LlegadaMesh")
+
+[node name="CentinelaA" parent="." instance=ExtResource("3")]
+position = Vector3(-1.5, 1.6, -7)
+
+[node name="CentinelaB" parent="." instance=ExtResource("3")]
+position = Vector3(8, 2, -10)
+intervalo_ataque = 2.8
+radio_patrulla = 1.5
+
+[node name="CoberturaIzquierda" type="StaticBody3D" parent="."]
+position = Vector3(-4, 1.25, 0)
+rotation_degrees = Vector3(0, -12, 0)
+
+[node name="Mesh" type="MeshInstance3D" parent="CoberturaIzquierda"]
+position = Vector3(0.137, -0.117, -0.01)
+scale = Vector3(1.82, 1.377, 1.095)
+mesh = ExtResource("6")
+
+[node name="Colision" type="CollisionShape3D" parent="CoberturaIzquierda"]
+shape = SubResource("CoberturaIzquierdaShape")
+
+[node name="CoberturaDerecha" type="StaticBody3D" parent="."]
+position = Vector3(4, 1.4, -3)
+rotation_degrees = Vector3(0, 15, 0)
+
+[node name="Mesh" type="MeshInstance3D" parent="CoberturaDerecha"]
+position = Vector3(0.137, -0.131, -0.01)
+scale = Vector3(1.82, 1.543, 1.095)
+mesh = ExtResource("6")
+
+[node name="Colision" type="CollisionShape3D" parent="CoberturaDerecha"]
+shape = SubResource("CoberturaDerechaShape")
+
+[node name="Rampa" type="StaticBody3D" parent="."]
+position = Vector3(-10, 0.7, 3)
+rotation_degrees = Vector3(18, 0, 0)
+
+[node name="Mesh" type="MeshInstance3D" parent="Rampa"]
+mesh = SubResource("RampaMesh")
+
+[node name="Colision" type="CollisionShape3D" parent="Rampa"]
+shape = SubResource("RampaShape")
+
+[node name="EscalonBajo" type="StaticBody3D" parent="."]
+position = Vector3(8, 0.3, 8)
+rotation_degrees = Vector3(0, 0, 0)
+
+[node name="Mesh" type="MeshInstance3D" parent="EscalonBajo"]
+mesh = SubResource("EscalonBajoMesh")
+
+[node name="Colision" type="CollisionShape3D" parent="EscalonBajo"]
+shape = SubResource("EscalonBajoShape")
+
+[node name="EscalonMedio" type="StaticBody3D" parent="."]
+position = Vector3(10, 0.65, 5)
+rotation_degrees = Vector3(0, 0, 0)
+
+[node name="Mesh" type="MeshInstance3D" parent="EscalonMedio"]
+mesh = SubResource("EscalonMedioMesh")
+
+[node name="Colision" type="CollisionShape3D" parent="EscalonMedio"]
+shape = SubResource("EscalonMedioShape")
+
+[node name="EscalonAlto" type="StaticBody3D" parent="."]
+position = Vector3(11, 1, 2)
+rotation_degrees = Vector3(0, 0, 0)
+
+[node name="Mesh" type="MeshInstance3D" parent="EscalonAlto"]
+mesh = SubResource("EscalonAltoMesh")
+
+[node name="Colision" type="CollisionShape3D" parent="EscalonAlto"]
+shape = SubResource("EscalonAltoShape")
+
+[node name="IslaSalto" type="StaticBody3D" parent="."]
+position = Vector3(23, -0.5, 0)
+rotation_degrees = Vector3(0, 0, 0)
+
+[node name="Mesh" type="MeshInstance3D" parent="IslaSalto"]
+mesh = SubResource("IslaSaltoMesh")
+
+[node name="Colision" type="CollisionShape3D" parent="IslaSalto"]
+shape = SubResource("IslaSaltoShape")
+
+[node name="PuntoNave" type="Marker3D" parent="."]
+position = Vector3(5, 0.3, 12)
+
+[node name="PuntoBajada" type="Marker3D" parent="."]
+position = Vector3(0, 0.2, 10)
+
+[node name="Baliza" type="Label3D" parent="."]
+position = Vector3(0, 9, 0)
+billboard = 1
+no_depth_test = true
+fixed_size = true
+pixel_size = 0.0011
+modulate = Color(0.45, 1, 0.025, 1)
+outline_modulate = Color(0, 0, 0, 1)
+text = "▼
+ZONA DE ATERRIZAJE"
+font_size = 40
+outline_size = 10
