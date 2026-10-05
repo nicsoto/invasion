@@ -77,7 +77,8 @@ scale = Vector2(0.0786376, 0.043396804)
 theme_override_font_sizes/font_size = 31
 text = "
 CONTROLES:
-Pausar/Despausar: E
+Pausar/Despausar: P
+Aterrizar/Bajar: E
 Moverse: WASD
 Sprint: W+W
 Disparar: Left Click
