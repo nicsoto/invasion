@@ -29,6 +29,14 @@ var _salto_pendiente := 0.0
 var _control_habilitado := false
 var invulnerable := false 
 
+#Headboppppppp
+@export_group("Movimiento de Cámara (Headbob)")
+@export var frecuencia_bob := 2.2
+@export var amplitud_caminar := 0.05
+@export var amplitud_correr := 0.09
+
+var _tiempo_bob := 0.0
+var _posicion_original_camara := Vector3.ZERO
 
 @onready var cabeza: Node3D = $Cabeza
 @onready var camara_fps: Camera3D = $Cabeza/Camera3D
@@ -40,6 +48,15 @@ var invulnerable := false
 @onready var camara_cinematica: Camera3D = $CamaraCinematica
 @onready var modelo: MeshInstance3D = $Modelo
 
+#para el recoil del arma
+@export_group("Retroceso del Arma")
+@export var fuerza_retroceso := 0.15
+@export var tiempo_retroceso := 0.05
+@export var tiempo_recuperacion := 0.15
+
+@onready var modelo_arma: Node3D = $Cabeza/Arma
+var _posicion_original_arma := Vector3.ZERO
+
 
 func _ready() -> void:
 	Controles.registrar()
@@ -48,6 +65,9 @@ func _ready() -> void:
 	salud_cambiada.emit(salud, salud_maxima)
 	if cinematica:
 		cinematica.hide()
+	_posicion_original_camara = camara_fps.position
+	if modelo_arma:
+		_posicion_original_arma = modelo_arma.position
 
 
 func iniciar_animacion_bajada(nave_real: Node3D) -> void:
@@ -153,6 +173,12 @@ func _physics_process(delta: float) -> void:
 		
 	move_and_slide()
 	
+	if recibe_input:
+		_aplicar_headbob(delta)
+	
+	if recibe_input and Input.is_action_pressed("pie_disparar"):
+		disparar()
+	
 	if recibe_input and Input.is_action_pressed("pie_disparar"):
 		disparar()
 
@@ -174,6 +200,11 @@ func disparar() -> bool:
 			cuerpo.take_damage(dano)
 			acerto = true
 	Trazo.mostrar(get_tree().current_scene, canon.global_position, destino, Color(0.3, 1, 0.8))
+	Trazo.mostrar(get_tree().current_scene, canon.global_position, destino, Color(0.3, 1, 0.8))
+	
+	
+	_aplicar_retroceso_arma()
+	
 	disparo_realizado.emit(acerto)
 	return true
 
@@ -185,3 +216,36 @@ func take_damage(cantidad: int) -> void:
 	if salud == 0:
 		set_activo(false)
 		murio.emit()
+		
+	#Headbop
+func _aplicar_headbob(delta: float) -> void:
+	
+	var vel_plana := Vector2(velocity.x, velocity.z).length()
+	
+	if is_on_floor() and vel_plana > 0.5:
+		
+		_tiempo_bob += delta * vel_plana * frecuencia_bob
+		var amplitud := amplitud_correr if Input.is_action_pressed("pie_correr") else amplitud_caminar
+		
+		var offset_y := sin(_tiempo_bob) * amplitud
+		var offset_x := cos(_tiempo_bob / 2.0) * (amplitud * 0.6)
+		
+		
+		camara_fps.position.y = lerpf(camara_fps.position.y, _posicion_original_camara.y + offset_y, delta * 15.0)
+		camara_fps.position.x = lerpf(camara_fps.position.x, _posicion_original_camara.x + offset_x, delta * 15.0)
+	else:
+		
+		camara_fps.position.y = lerpf(camara_fps.position.y, _posicion_original_camara.y, delta * 8.0)
+		camara_fps.position.x = lerpf(camara_fps.position.x, _posicion_original_camara.x, delta * 8.0)
+		
+#Recoil arma
+func _aplicar_retroceso_arma() -> void:
+	if not modelo_arma:
+		return
+
+	var tween = create_tween()
+	
+	var posicion_atras = _posicion_original_arma + Vector3(0, 0, fuerza_retroceso)
+	tween.tween_property(modelo_arma, "position", posicion_atras, tiempo_retroceso).set_trans(Tween.TRANS_SINE).set_ease(Tween.EASE_OUT)
+	
+	tween.tween_property(modelo_arma, "position", _posicion_original_arma, tiempo_recuperacion).set_trans(Tween.TRANS_SINE).set_ease(Tween.EASE_IN_OUT)
