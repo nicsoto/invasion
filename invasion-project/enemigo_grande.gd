@@ -1,16 +1,13 @@
 extends CharacterBody3D
 
-
 var salud = 100
 var velocidad = 8.0
 var jugador = null
 var bala_escena = preload("res://bala.tscn")
-
 var explosion_escena = preload("res://explosion.tscn")
-
 var tiempo_disparo = 0.0 
-@onready var canon = $CanonEnemigo
 
+@onready var canon = $CanonEnemigo
 @onready var barra_vida_3d = $BarraVida3D
 
 func _ready():
@@ -19,9 +16,9 @@ func _ready():
 func _physics_process(delta):
 	if not jugador:
 		return
+		
 	look_at(jugador.global_position, Vector3.UP)
 	
-   
 	if global_position.distance_to(jugador.global_position) > 15.0:
 		var direccion = (jugador.global_position - global_position).normalized()
 		velocity = direccion * velocidad
@@ -29,6 +26,7 @@ func _physics_process(delta):
 		velocity = Vector3.ZERO
 		
 	move_and_slide()
+	
 	tiempo_disparo += delta
 	if tiempo_disparo >= 1.5:
 		tiempo_disparo = 0.0
@@ -50,10 +48,15 @@ func take_damage(cantidad):
 	barra_vida_3d.scale.x = salud / 100.0
 	if salud <= 30:
 		barra_vida_3d.get_active_material(0).albedo_color = Color.RED
+		
 	if salud <= 0:
 		var nueva_explosion = explosion_escena.instantiate()
-		get_tree().current_scene.add_child(nueva_explosion)
-		nueva_explosion.global_position = global_position 
-		$MeshInstance3D.hide()
-		queue_free() 
 		
+		
+		nueva_explosion.global_position = self.global_position 
+		
+		
+		get_tree().current_scene.add_child(nueva_explosion)
+		
+		$MeshInstance3D.hide()
+		queue_free()
