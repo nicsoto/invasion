@@ -1,0 +1,24 @@
+[remap]
+
+importer="wav"
+type="AudioStreamWAV"
+uid="uid://xnfs5pigr584"
+path="res://.godot/imported/motor jugador_jerryberumen__spaceship-engine-idle-3.wav-bc93c904c41f5198f5057481222fe5fc.sample"
+
+[deps]
+
+source_file="res://Sonido/motor jugador_jerryberumen__spaceship-engine-idle-3.wav"
+dest_files=["res://.godot/imported/motor jugador_jerryberumen__spaceship-engine-idle-3.wav-bc93c904c41f5198f5057481222fe5fc.sample"]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop_mode=2
+edit/loop_begin=0
+edit/loop_end=-1
+compress/mode=2

@@ -1,6 +1,8 @@
 [gd_scene format=4 uid="uid://b4kvqppumh11e"]
 
 [ext_resource type="Script" uid="uid://b3mgbr6d46mko" path="res://enemigo_grande.gd" id="1_redfx"]
+[ext_resource type="AudioStream" uid="uid://cacyrl6f450pi" path="res://Sonido/motor nave grande__pepe827__motor-vehiculo-futurista-grande.wav" id="2_27cwd"]
+[ext_resource type="AudioStream" uid="uid://d4m7d1usx0wgd" path="res://Sonido/golpe enemigo_michael_grinnell__metallic-clunk.wav" id="3_wo03q"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_16k11"]
 albedo_color = Color(0.62258214, 0.14617294, 0.0665023, 1)
@@ -44,7 +46,7 @@ blend_shape_mode = 0
 shadow_mesh = SubResource("ArrayMesh_tvutc")
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_usgnq"]
-size = Vector3(5.1801453, 2.5067139, 5.7539063)
+size = Vector3(5.1801453, 1.0713882, 5.7539063)
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_mtxbc"]
 albedo_color = Color(0.28235295, 0.92156863, 0.19215687, 1)
@@ -64,12 +66,24 @@ transform = Transform3D(1.185, 0, 0, 0, 0.593, 0, 0, 0, 2.208, 0, 0, 0)
 mesh = SubResource("ArrayMesh_redfx")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=41064292]
-transform = Transform3D(1.4454762, 0, 0, 0, 1.4454762, 0, 0, 0, 1.4454762, -0.118734956, 0.79509825, 1.9269543)
+transform = Transform3D(1.4454762, 0, 0, 0, 1.4454762, 0, 0, 0, 1.4454762, -0.118734956, 1.0708838, 1.9269543)
 shape = SubResource("BoxShape3D_usgnq")
 
 [node name="CanonEnemigo" type="Marker3D" parent="." unique_id=2122156348]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.052023, 2.8519773)
+transform = Transform3D(-1, 8.742278e-08, 0, -8.742278e-08, -1, 0, 0, 0, 1, 1.2098788e-07, -0.33191705, 6.7347183)
 
 [node name="BarraVida3D" type="MeshInstance3D" parent="." unique_id=968503352]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 3.2716594, 0)
 mesh = SubResource("BoxMesh_eg8xt")
+
+[node name="MotorEnemigo1" type="AudioStreamPlayer3D" parent="." unique_id=1915119499]
+stream = ExtResource("2_27cwd")
+autoplay = true
+max_distance = 50.0
+
+[node name="SonidoDisparo" type="AudioStreamPlayer3D" parent="." unique_id=1250086837]
+max_distance = 70.0
+
+[node name="SonidoImpacto" type="AudioStreamPlayer3D" parent="." unique_id=1752025862]
+stream = ExtResource("3_wo03q")
+max_distance = 70.0

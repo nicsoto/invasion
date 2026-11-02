@@ -29,6 +29,9 @@ var _flash := 0.0
 @onready var nucleo: MeshInstance3D = $Nucleo
 @onready var _luz_nucleo: StandardMaterial3D = nucleo.get_active_material(0)
 
+@onready var sonido_disparo: AudioStreamPlayer3D = $SonidoDisparoNave
+@onready var sonido_impacto: AudioStreamPlayer3D = $SonidoImpacto
+
 func _ready() -> void:
 	salud = salud_maxima
 	_origen = global_position
@@ -39,23 +42,59 @@ func _physics_process(delta: float) -> void:
 		return
 	_tiempo += delta
 	_flash = maxf(0, _flash - delta)
-	var destino := _origen + Vector3(sin(_tiempo * 0.6) * radio_patrulla, 0, 0)
-	velocity = (destino - global_position).limit_length(velocidad_patrulla)
+	
+	
+	_objetivo = get_tree().get_first_node_in_group("personaje_terrestre") as Node3D
+	
+	
+	if is_instance_valid(_objetivo):
+		
+		var pos_mirar = Vector3(_objetivo.global_position.x, global_position.y, _objetivo.global_position.z)
+		
+		if global_position.distance_to(pos_mirar) > 0.1:
+			look_at(pos_mirar, Vector3.UP)
+		
+		
+		if global_position.distance_to(_objetivo.global_position) > 4.0:
+			var direccion = (pos_mirar - global_position).normalized()
+			velocity = direccion * 1.5 
+		else:
+			velocity = Vector3.ZERO
+	else:
+		
+		var destino := _origen + Vector3(sin(_tiempo * 0.6) * radio_patrulla, 0, 0)
+		velocity = (destino - global_position).limit_length(velocidad_patrulla)
+		
+	
 	move_and_slide()
+	
 	if _aviso > 0:
 		_aviso -= delta
+		if is_instance_valid(_objetivo):
+			if "camara_fps" in _objetivo and is_instance_valid(_objetivo.camara_fps):
+				_destino_disparo = _objetivo.camara_fps.global_position
+			else:
+				_destino_disparo = _objetivo.global_position + Vector3.UP * 1.5
+				
 		if _aviso <= 0:
 			_disparar()
 			_espera = intervalo_ataque
 		_actualizar_estado()
 		return
+		
 	_espera = maxf(0, _espera - delta)
-	_objetivo = get_tree().get_first_node_in_group("personaje_terrestre") as Node3D
+	
 	if _espera == 0 and is_instance_valid(_objetivo):
-		var punto := _objetivo.global_position + Vector3.UP * 1.3
+		var punto: Vector3
+		if "camara_fps" in _objetivo and is_instance_valid(_objetivo.camara_fps):
+			punto = _objetivo.camara_fps.global_position
+		else:
+			punto = _objetivo.global_position + Vector3.UP * 1.5
+			
 		if canon.global_position.distance_to(punto) <= alcance and _puede_ver(punto):
 			_destino_disparo = punto
 			_aviso = tiempo_aviso
+			
 	_actualizar_estado()
 
 func _puede_ver(punto: Vector3) -> bool:
@@ -65,16 +104,22 @@ func _puede_ver(punto: Vector3) -> bool:
 	return not impacto.is_empty() and impacto.collider == _objetivo
 
 func _disparar() -> void:
+	if sonido_disparo:
+		sonido_disparo.pitch_scale = randf_range(0.85, 1.15)
+		sonido_disparo.play()
+		
 	var direccion := (_destino_disparo - canon.global_position).normalized()
 	var fin := canon.global_position + direccion * alcance
 	var consulta := PhysicsRayQueryParameters3D.create(canon.global_position, fin,
 		collision_mask, [get_rid()])
 	var impacto := get_world_3d().direct_space_state.intersect_ray(consulta)
+	
 	if not impacto.is_empty():
 		fin = impacto.position
 		var cuerpo: Node = impacto.collider
 		if cuerpo.is_in_group("personaje_terrestre") and cuerpo.has_method("take_damage"):
 			cuerpo.take_damage(dano)
+			
 	Trazo.mostrar(get_tree().current_scene, canon.global_position, fin, Color(1, 0.25, 0.15))
 
 func take_damage(_cantidad: int) -> void:
@@ -86,13 +131,16 @@ func recibir_disparo_terrestre(cantidad: int) -> bool:
 	if salud <= 0 or cantidad <= 0:
 		return false
 	salud = maxi(0, salud - cantidad)
+	
+	if sonido_impacto:
+		sonido_impacto.play()
+		
 	_actualizar_estado()
+	
 	if salud == 0:
 		var nueva_explosion = explosion_escena.instantiate()
-		
 		nueva_explosion.global_position = global_position
 		get_tree().current_scene.add_child(nueva_explosion)
-		
 		derrotado.emit()
 		queue_free()
 	return true

@@ -44,6 +44,20 @@ var _posicion_original_camara := Vector3.ZERO
 @onready var canon: Marker3D = $Cabeza/Canon
 @onready var colision: CollisionShape3D = $CollisionShape3D
 
+#muerte
+@onready var camara_muerte: Camera3D = $CamaraMuerte 
+@onready var tu_modelo_3d: MeshInstance3D = $Modelo
+@onready var arma: MeshInstance3D = $Cabeza/Arma
+var explosion_escena = preload("res://explosion.tscn")
+var esta_muerto := false
+
+#sonido
+@onready var sonido_disparo = $Cabeza/SonidoDisparo
+@onready var sonido_hit = $SonidoHitEnemigo
+@onready var sonido_dano = $SonidoDanoRecibido
+@onready var sonido_pasos = $SonidoPasos
+
+
 @onready var cinematica: Node3D = $Cinematica
 @onready var animador: AnimationPlayer = $Cinematica/AnimationPlayer
 @onready var camara_cinematica: Camera3D = $CamaraCinematica
@@ -140,6 +154,13 @@ func _unhandled_input(event: InputEvent) -> void:
 		interaccion_solicitada.emit(self)
 
 func _physics_process(delta: float) -> void:
+	if esta_muerto:
+		move_and_slide()
+		return
+		
+	if global_position.y < -9.5:
+		iniciar_cinematica_muerte("caida")
+		return
 	if not activo:
 		return
 	_recarga = maxf(0, _recarga - delta)
@@ -187,6 +208,7 @@ func disparar() -> bool:
 	if not activo or _recarga > 0:
 		return false
 	_recarga = intervalo_disparo
+	sonido_disparo.play()
 	var origen := camara_fps.global_position
 	var destino := origen - camara_fps.global_basis.z * alcance
 	var consulta := PhysicsRayQueryParameters3D.create(origen, destino, collision_mask, [get_rid()])
@@ -207,6 +229,7 @@ func disparar() -> bool:
 				and not cuerpo.is_in_group("torre_defensa"):
 			cuerpo.take_damage(dano)
 			acerto = true
+			sonido_hit.play()
 	Trazo.mostrar(get_tree().current_scene, canon.global_position, destino, Color(0.3, 1, 0.8))
 	Trazo.mostrar(get_tree().current_scene, canon.global_position, destino, Color(0.3, 1, 0.8))
 	
@@ -217,32 +240,78 @@ func disparar() -> bool:
 	return true
 
 func take_damage(cantidad: int) -> void:
+	if esta_muerto:
+		return
+		
+	sonido_dano.play()
 	if not activo or cantidad <= 0 or invulnerable:
 		return
+		
 	salud = maxi(0, salud - cantidad)
 	salud_cambiada.emit(salud, salud_maxima)
+	
 	if salud == 0:
 		set_activo(false)
-		murio.emit()
+		iniciar_cinematica_muerte("terrestre")
+
+func iniciar_cinematica_muerte(tipo: String) -> void:
+	esta_muerto = true
+	
+	camara_fps.current = false 
+	camara_muerte.current = true
+	camara_muerte.top_level = true 
+	
+	# 1. CÁMARA DESDE ARRIBA: 3 metros arriba y 2 metros a un lado (nunca tocará el piso)
+	camara_muerte.global_position = global_position + Vector3(2.0, 3.0, 2.0)
+	camara_muerte.look_at(global_position + Vector3(0, 1.0, 0))
+	camara_muerte.cull_mask = 0xFFFFFFFF
+	
+	# 2. VISIBILIDAD ABSOLUTA DEL MODELO
+	tu_modelo_3d.show()
+	if tu_modelo_3d is GeometryInstance3D:
+		tu_modelo_3d.cast_shadow = GeometryInstance3D.SHADOW_CASTING_SETTING_ON
 		
-	#Headbop
+	# Busca cualquier pieza 3D que esté dentro del modelo y la fuerza a ser visible
+	for pieza in tu_modelo_3d.find_children("*", "GeometryInstance3D"):
+		pieza.show()
+		pieza.cast_shadow = GeometryInstance3D.SHADOW_CASTING_SETTING_ON
+	
+	if tipo == "caida":
+		velocity = Vector3(0, 0.3, 0)
+	elif tipo == "terrestre":
+		velocity = Vector3.ZERO
+		
+	await get_tree().create_timer(1.0).timeout
+	
+	# Explosión
+	var nueva_explosion = explosion_escena.instantiate()
+	nueva_explosion.global_position = global_position + Vector3(0, 1.0, 0) 
+	get_tree().current_scene.add_child(nueva_explosion)
+	
+	# Ocultar todo
+	tu_modelo_3d.hide()
+	arma.hide() 
+	
+	await get_tree().create_timer(1.5).timeout
+	murio.emit()
+		
+	#Headbop y sonido de los pasos
 func _aplicar_headbob(delta: float) -> void:
-	
 	var vel_plana := Vector2(velocity.x, velocity.z).length()
-	
 	if is_on_floor() and vel_plana > 0.5:
-		
 		_tiempo_bob += delta * vel_plana * frecuencia_bob
 		var amplitud := amplitud_correr if Input.is_action_pressed("pie_correr") else amplitud_caminar
 		
+		if sin(_tiempo_bob) < -0.95 and not sonido_pasos.playing:
+			
+			sonido_pasos.pitch_scale = randf_range(0.9, 1.1)
+			sonido_pasos.play()
+			
 		var offset_y := sin(_tiempo_bob) * amplitud
 		var offset_x := cos(_tiempo_bob / 2.0) * (amplitud * 0.6)
-		
-		
 		camara_fps.position.y = lerpf(camara_fps.position.y, _posicion_original_camara.y + offset_y, delta * 15.0)
 		camara_fps.position.x = lerpf(camara_fps.position.x, _posicion_original_camara.x + offset_x, delta * 15.0)
 	else:
-		
 		camara_fps.position.y = lerpf(camara_fps.position.y, _posicion_original_camara.y, delta * 8.0)
 		camara_fps.position.x = lerpf(camara_fps.position.x, _posicion_original_camara.x, delta * 8.0)
 		

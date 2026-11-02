@@ -6,9 +6,13 @@
 [ext_resource type="PackedScene" uid="uid://b7ordh3rixkl5" path="res://jugador.tscn" id="4"]
 [ext_resource type="Script" uid="uid://egcdncmnqwsu" path="res://terrestre/personaje.gd" id="5_ak5j8"]
 [ext_resource type="PackedScene" uid="uid://dyoaaf6dc3pbc" path="res://spawner.tscn" id="6"]
-[ext_resource type="ArrayMesh" path="res://terrestre/arte/hito0/alien.res" id="6_j83s1"]
+[ext_resource type="ArrayMesh" uid="uid://doumnoomwjcc3" path="res://terrestre/arte/hito0/alien.res" id="6_j83s1"]
 [ext_resource type="PackedScene" uid="uid://cmvj23h5gwc1l" path="res://spawner_asteroides.tscn" id="7"]
-[ext_resource type="ArrayMesh" path="res://terrestre/arte/hito0/arma.res" id="7_y1the"]
+[ext_resource type="ArrayMesh" uid="uid://my1w7gf4ne7e" path="res://terrestre/arte/hito0/arma.res" id="7_y1the"]
+[ext_resource type="AudioStream" uid="uid://dvm5xt1l5qlr0" path="res://Sonido/disparo jugador_fantozzi__ftz_gc_118_phaserattack1.wav" id="8_j83s1"]
+[ext_resource type="AudioStream" uid="uid://d4m7d1usx0wgd" path="res://Sonido/golpe enemigo_michael_grinnell__metallic-clunk.wav" id="9_kwfy5"]
+[ext_resource type="AudioStream" uid="uid://gb5lc1ddfn50" path="res://Sonido/golpe jugador__jetrod__clonk1.wav" id="10_hk0mb"]
+[ext_resource type="AudioStream" uid="uid://d2sg5d0sbog2r" path="res://Sonido/pasos - heyheytheree .wav" id="11_hk0mb"]
 
 [sub_resource type="PanoramaSkyMaterial" id="CieloMaterial"]
 panorama = ExtResource("2")
@@ -428,12 +432,15 @@ cull_mask = 1048573
 fov = 78.0
 
 [node name="Arma" type="MeshInstance3D" parent="PersonajeTerrestre/Cabeza" unique_id=1148601233]
-transform = Transform3D(-6.119592e-08, 0, -1.3999995, 0, 1.4, 0, 1.3999995, 0, -6.119592e-08, -0.83454204, -0.2800002, 0.37068558)
+transform = Transform3D(-6.1195905e-08, 0, -1.3999993, 0, 1.4, 0, 1.3999993, 0, -6.1195905e-08, -0.6800076, -0.311594, 0.37068558)
 cast_shadow = 0
 mesh = ExtResource("7_y1the")
 
 [node name="Canon" type="Marker3D" parent="PersonajeTerrestre/Cabeza" unique_id=1123518425]
 transform = Transform3D(-4.3711335e-08, 0, -0.9999988, 0, 1, 0, 0.9999988, 0, -4.3711335e-08, -0.89465666, -0.28415203, 0.6313057)
+
+[node name="SonidoDisparo" type="AudioStreamPlayer3D" parent="PersonajeTerrestre/Cabeza" unique_id=835965687]
+stream = ExtResource("8_j83s1")
 
 [node name="Cinematica" type="Node3D" parent="PersonajeTerrestre" unique_id=797127771]
 transform = Transform3D(-0.9998862, 0, 0.015083782, 0, 1, 0, -0.015083782, 0, -0.9998862, -5.662079, -0.037459373, 0.5208626)
@@ -576,6 +583,18 @@ mesh = SubResource("ArrayMesh_je4xr")
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="PersonajeTerrestre/Cinematica" unique_id=276483147]
 libraries/ = SubResource("AnimationLibrary_ysvuu")
+
+[node name="SonidoHitEnemigo" type="AudioStreamPlayer" parent="PersonajeTerrestre" unique_id=1955877874]
+stream = ExtResource("9_kwfy5")
+
+[node name="SonidoDanoRecibido" type="AudioStreamPlayer" parent="PersonajeTerrestre" unique_id=1186585614]
+stream = ExtResource("10_hk0mb")
+
+[node name="SonidoPasos" type="AudioStreamPlayer3D" parent="PersonajeTerrestre" unique_id=1549690907]
+stream = ExtResource("11_hk0mb")
+
+[node name="CamaraMuerte" type="Camera3D" parent="PersonajeTerrestre" unique_id=187917720]
+transform = Transform3D(-0.9952285, 1.4576804e-09, -0.09757171, -0.042484023, 0.9002307, 0.43333572, 0.087837055, 0.4354133, -0.89593524, 0, 3.5833502, -3.8773193)
 
 [node name="Spawner" parent="." unique_id=25060000 instance=ExtResource("6")]
 

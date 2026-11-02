@@ -1,0 +1,24 @@
+[remap]
+
+importer="wav"
+type="AudioStreamWAV"
+uid="uid://b0276oakax2do"
+path="res://.godot/imported/disparo nave grande_djgriffin__acid-ray-gun.wav-64473b9c50fe57322be61be5120298e9.sample"
+
+[deps]
+
+source_file="res://Sonido/disparo nave grande_djgriffin__acid-ray-gun.wav"
+dest_files=["res://.godot/imported/disparo nave grande_djgriffin__acid-ray-gun.wav-64473b9c50fe57322be61be5120298e9.sample"]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop_mode=0
+edit/loop_begin=0
+edit/loop_end=-1
+compress/mode=2

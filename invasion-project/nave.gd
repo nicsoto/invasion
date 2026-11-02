@@ -22,6 +22,16 @@ var sensibilidad = 0.004
 @onready var canon = $Head/Canon
 @onready var camara = $Head/Camera3D
 
+@onready var sonido_disparo: AudioStreamPlayer3D = $SonidoDisparoNaveJugador
+
+#muerte
+@onready var camara_muerte: Camera3D = $CamaraMuerte
+@onready var modelo_nave: Node3D = $chata
+@onready var camara_nave: Camera3D = $Head/Camera3D
+
+var explosion_escena = preload("res://explosion.tscn")
+var esta_muerto := false
+
 @onready var barra_salud = $HUD/BarraSalud
 @onready var menu_pausa = $HUD/MenuPausa
 func _ready():
@@ -60,6 +70,10 @@ func _unhandled_input(event):
 		esta_sprinteando = false
 
 func _physics_process(delta):
+	if esta_muerto:
+		move_and_slide()
+		return
+
 	if get_tree().paused: return
 	if not esta_activa: return
 
@@ -89,6 +103,10 @@ func _physics_process(delta):
 
 func disparar():
 	can_shoot = false
+	
+	if sonido_disparo:
+		sonido_disparo.play()
+		
 	var nueva_bala = bala_escena.instantiate()
 	nueva_bala.disparador = "jugador" 
 	get_parent().add_child(nueva_bala)
@@ -98,16 +116,37 @@ func disparar():
 	can_shoot = true
 	
 func take_damage(cantidad):
-	if not esta_activa:
+	if not esta_activa or esta_muerto:
 		return
-	if salud <=0:
+	if salud <= 0:
 		return
+		
 	salud -= cantidad
-	barra_salud.value= salud
+	barra_salud.value = salud
 	
 	if salud <= 0:
-		mostrar_menu_muerte()
+		iniciar_cinematica_muerte_nave()
 
+func iniciar_cinematica_muerte_nave() -> void:
+	esta_muerto = true
+	esta_activa = false
+	
+	camara_nave.current = false
+	camara_muerte.current = true
+	
+	velocity = Vector3(0.5, 0.2, 0)
+	
+	await get_tree().create_timer(0.5).timeout
+	
+	var nueva_explosion = explosion_escena.instantiate()
+	nueva_explosion.global_position = global_position
+	get_tree().current_scene.add_child(nueva_explosion)
+	
+	modelo_nave.hide()
+	
+	await get_tree().create_timer(1.5).timeout
+	mostrar_menu_muerte()
+	
 func mostrar_menu_muerte():
 	get_tree().paused = true
 	menu_muerte.visible = true

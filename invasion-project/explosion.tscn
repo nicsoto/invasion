@@ -18,7 +18,6 @@ point_count = 2
 [node name="GPUParticles3D" type="CPUParticles3D" unique_id=272843402]
 emitting = false
 amount = 40
-lifetime = 0.4
 one_shot = true
 preprocess = 0.05
 explosiveness = 1.0

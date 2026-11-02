@@ -1,0 +1,24 @@
+[remap]
+
+importer="wav"
+type="AudioStreamWAV"
+uid="uid://bssje07ef8yf"
+path="res://.godot/imported/explosion enemigo_jalastram__sfx_explosion_14.wav-b74e155b9cd057682cba6edf4b819481.sample"
+
+[deps]
+
+source_file="res://Sonido/explosion enemigo_jalastram__sfx_explosion_14.wav"
+dest_files=["res://.godot/imported/explosion enemigo_jalastram__sfx_explosion_14.wav-b74e155b9cd057682cba6edf4b819481.sample"]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop_mode=0
+edit/loop_begin=0
+edit/loop_end=-1
+compress/mode=2

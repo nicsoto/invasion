@@ -1,6 +1,8 @@
 [gd_scene format=4 uid="uid://b7ordh3rixkl5"]
 
 [ext_resource type="Script" uid="uid://cs1rrfhfx0r7j" path="res://nave.gd" id="1_16k11"]
+[ext_resource type="AudioStream" uid="uid://xnfs5pigr584" path="res://Sonido/motor jugador_jerryberumen__spaceship-engine-idle-3.wav" id="2_omvyu"]
+[ext_resource type="AudioStream" uid="uid://dvm5xt1l5qlr0" path="res://Sonido/disparo jugador_fantozzi__ftz_gc_118_phaserattack1.wav" id="3_8o684"]
 
 [sub_resource type="CylinderShape3D" id="CylinderShape3D_usgnq"]
 
@@ -190,6 +192,14 @@ _surfaces = [{
 blend_shape_mode = 0
 shadow_mesh = SubResource("ArrayMesh_mktqk")
 
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_usgnq"]
+albedo_color = Color(0.16862746, 0.4, 0.25882354, 1)
+emission_enabled = true
+emission = Color(0.34817636, 0.7113706, 0.27397797, 1)
+emission_energy_multiplier = 0.05
+refraction_enabled = true
+refraction_scale = 1.0
+
 [sub_resource type="ArrayMesh" id="ArrayMesh_ydkpg"]
 _surfaces = [{
 "aabb": AABB(-0.39595222, -0.2450557, 0.12995312, 0.44014096, 0.31777376, 0.15557978),
@@ -220,6 +230,13 @@ _surfaces = [{
 }]
 blend_shape_mode = 0
 shadow_mesh = SubResource("ArrayMesh_ydkpg")
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_eg8xt"]
+albedo_color = Color(0.16862746, 0.4, 0.25882354, 1)
+emission_enabled = true
+emission = Color(0.34901962, 0.70980394, 0.27450982, 1)
+emission_energy_multiplier = 0.05
+refraction_enabled = true
 
 [sub_resource type="Animation" id="Animation_y7prd"]
 resource_name = "Animation"
@@ -505,10 +522,12 @@ skeleton = NodePath("..")
 [node name="Star" type="MeshInstance3D" parent="chata" unique_id=1441303756]
 transform = Transform3D(0, -1.7399242e-07, -3.980482, 1.7399242e-07, -3.980482, 1.7399242e-07, -3.980482, -1.7399242e-07, 7.60545e-15, -0.014765739, 0.40028745, 0.0663712)
 mesh = SubResource("ArrayMesh_wfuvm")
+surface_material_override/0 = SubResource("StandardMaterial3D_usgnq")
 
 [node name="Star_001" type="MeshInstance3D" parent="chata" unique_id=1550198409]
 transform = Transform3D(0, -1.7399242e-07, -3.980482, 1.7399242e-07, -3.980482, 1.7399242e-07, -3.980482, -1.7399242e-07, 7.60545e-15, -0.014765739, 0.39517456, 0.0663712)
 mesh = SubResource("ArrayMesh_gbm0j")
+surface_material_override/0 = SubResource("StandardMaterial3D_eg8xt")
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="chata" unique_id=1624805497]
 libraries/ = SubResource("AnimationLibrary_16k11")
@@ -615,6 +634,17 @@ offset_bottom = 72.48276
 scale = Vector2(0.06087108, 0.05603438)
 theme_override_font_sizes/font_size = 33
 text = "Salir"
+
+[node name="MotorSonido" type="AudioStreamPlayer3D" parent="." unique_id=214281721]
+stream = ExtResource("2_omvyu")
+autoplay = true
+max_distance = 40.0
+
+[node name="SonidoDisparoNaveJugador" type="AudioStreamPlayer3D" parent="." unique_id=1788696821]
+stream = ExtResource("3_8o684")
+
+[node name="CamaraMuerte" type="Camera3D" parent="." unique_id=1905346278]
+transform = Transform3D(-1, 5.0491973e-08, -7.1367374e-08, 0, 0.81634766, 0.5775609, 8.742278e-08, 0.5775609, -0.81634766, -4.664988e-07, 2.3608863, -5.3361244)
 
 [connection signal="pressed" from="HUD/MenuMuerte/BotonJugar" to="." method="_on_boton_jugar_pressed"]
 [connection signal="pressed" from="HUD/MenuMuerte/BotonSalir" to="." method="_on_boton_salir_pressed"]

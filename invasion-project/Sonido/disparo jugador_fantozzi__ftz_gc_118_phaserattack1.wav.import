@@ -1,0 +1,24 @@
+[remap]
+
+importer="wav"
+type="AudioStreamWAV"
+uid="uid://dvm5xt1l5qlr0"
+path="res://.godot/imported/disparo jugador_fantozzi__ftz_gc_118_phaserattack1.wav-9395ed4359046273103aed459350d17f.sample"
+
+[deps]
+
+source_file="res://Sonido/disparo jugador_fantozzi__ftz_gc_118_phaserattack1.wav"
+dest_files=["res://.godot/imported/disparo jugador_fantozzi__ftz_gc_118_phaserattack1.wav-9395ed4359046273103aed459350d17f.sample"]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop_mode=0
+edit/loop_begin=0
+edit/loop_end=-1
+compress/mode=2
