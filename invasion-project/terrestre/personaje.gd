@@ -7,6 +7,7 @@ signal interaccion_solicitada(personaje: Node3D)
 
 const Controles = preload("res://terrestre/controles.gd")
 const Trazo = preload("res://terrestre/trazo.gd")
+const ReglasCupula = preload("res://terrestre/defensa/reglas_cupula.gd")
 
 @export var activo := true
 @export var usar_camara_propia := true
@@ -193,10 +194,17 @@ func disparar() -> bool:
 	var acerto := false
 	if not impacto.is_empty():
 		destino = impacto.position
+	var escudo := ReglasCupula.interceptar(get_tree(), origen, destino, &"terrestre")
+	if not escudo.is_empty():
+		destino = escudo.position
+	elif not impacto.is_empty():
 		var cuerpo: Object = impacto.collider
-		if cuerpo.has_method("recibir_disparo_terrestre"):
+		if cuerpo.has_method("recibir_disparo_desde"):
+			acerto = cuerpo.recibir_disparo_desde(dano, self)
+		elif cuerpo.has_method("recibir_disparo_terrestre"):
 			acerto = cuerpo.recibir_disparo_terrestre(dano)
-		elif cuerpo.has_method("take_damage") and not cuerpo.is_in_group("jugador"):
+		elif cuerpo.has_method("take_damage") and not cuerpo.is_in_group("jugador") \
+				and not cuerpo.is_in_group("torre_defensa"):
 			cuerpo.take_damage(dano)
 			acerto = true
 	Trazo.mostrar(get_tree().current_scene, canon.global_position, destino, Color(0.3, 1, 0.8))

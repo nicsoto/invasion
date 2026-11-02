@@ -1,0 +1,13 @@
+[gd_scene load_steps=3 format=3]
+
+[ext_resource type="PackedScene" path="res://terrestre/enemigo_especial.tscn" id="1"]
+[ext_resource type="Script" path="res://terrestre/defensa/atacante_torre.gd" id="2"]
+
+[node name="AtacanteTorre" instance=ExtResource("1")]
+script = ExtResource("2")
+salud_maxima = 75
+dano = 5
+alcance = 32.0
+intervalo_ataque = 3.2
+tiempo_aviso = 0.8
+velocidad_patrulla = 5.0

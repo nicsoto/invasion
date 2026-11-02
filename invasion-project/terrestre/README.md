@@ -3,6 +3,12 @@
 Primera versión de la parte de Nicolás. Incluye una escena jugable independiente,
 un personaje reutilizable y centinelas que solo reciben daño del arma terrestre.
 
+La ampliación posterior al Hito 1 está en
+[`defensa/demo_defensa.tscn`](defensa/demo_defensa.tscn): una plataforma con torre,
+cúpula y una oleada que obliga a combatir a pie. Abrir esa escena y pulsar **F6**.
+Consultar la [guía de defensa e integración](defensa/README.md) para sus reglas,
+parámetros y señales. La demo terrestre descrita debajo sigue disponible.
+
 ## Probar en Godot
 
 1. Importar `invasion-project/project.godot` con Godot 4.7.1, la versión usada para

@@ -1,9 +1,17 @@
 extends Area3D
 
+const ReglasCupula = preload("res://terrestre/defensa/reglas_cupula.gd")
+
 var disparador = ""
 
 func _physics_process(delta):
-	position += transform.basis * Vector3(0, 0, -40.0) * delta
+	var siguiente: Vector3 = global_position - global_basis.z * 40.0 * delta
+	var escudo := ReglasCupula.interceptar(get_tree(), global_position, siguiente, &"espacial")
+	if not escudo.is_empty():
+		global_position = escudo.position
+		queue_free()
+		return
+	global_position = siguiente
 
 func _on_body_entered(body):
 	
