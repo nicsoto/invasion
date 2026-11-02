@@ -6,7 +6,7 @@ var jugador = null
 func _ready():
 	jugador = get_tree().get_first_node_in_group("jugador")
 	
-	rotacion_random = Vector3(randf_range(-1, 1), randf_range(-1, 1), randf_range(-1, 1))
+	rotacion_random = Vector3(randf_range(-0.2, 0.2), randf_range(-0.2, 0.2), randf_range(-0.2, 0.2))
 
 func _physics_process(delta):
 	

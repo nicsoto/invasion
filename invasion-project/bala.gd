@@ -23,3 +23,10 @@ func _on_body_entered(body):
 
 func _on_body_shape_entered(body_rid: RID, body: Node3D, body_shape_index: int, local_shape_index: int) -> void:
 	pass # Replace with function body.
+	
+func hacer_enemiga():
+	var material_clon = $MeshInstance3D.get_active_material(0).duplicate()
+	material_clon.albedo_color = Color.RED
+	if material_clon.emission_enabled:
+		material_clon.emission = Color.RED
+	$MeshInstance3D.material_override = material_clon

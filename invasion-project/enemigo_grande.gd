@@ -38,6 +38,7 @@ func disparar():
 		nueva_bala.disparador = "enemigo"
 		
 		get_tree().current_scene.add_child(nueva_bala) 
+		nueva_bala.hacer_enemiga()
 		nueva_bala.global_position = canon.global_position
 		nueva_bala.look_at(jugador.global_position, Vector3.UP)
 
