@@ -245,7 +245,7 @@ func _aplicar_retroceso_arma() -> void:
 
 	var tween = create_tween()
 	
-	var posicion_atras = _posicion_original_arma + Vector3(0, 0, fuerza_retroceso)
+	var posicion_atras = _posicion_original_arma + Vector3(0, 0, -fuerza_retroceso)
 	tween.tween_property(modelo_arma, "position", posicion_atras, tiempo_retroceso).set_trans(Tween.TRANS_SINE).set_ease(Tween.EASE_OUT)
 	
 	tween.tween_property(modelo_arma, "position", _posicion_original_arma, tiempo_recuperacion).set_trans(Tween.TRANS_SINE).set_ease(Tween.EASE_IN_OUT)
