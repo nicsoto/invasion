@@ -1,0 +1,31 @@
+[gd_scene format=3 uid="uid://ccq2l7p30ucen"]
+
+[ext_resource type="Script" uid="uid://bjsx113bwky1p" path="res://explosion.gd" id="1_q7epf"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_eg8xt"]
+albedo_color = Color(1, 0.7137255, 0.27058825, 1)
+emission_enabled = true
+emission = Color(1, 0.7137255, 0.27058825, 1)
+emission_energy_multiplier = 3.0
+
+[sub_resource type="BoxMesh" id="BoxMesh_usgnq"]
+material = SubResource("StandardMaterial3D_eg8xt")
+
+[sub_resource type="Curve" id="Curve_vxas0"]
+_data = [Vector2(0.026785716, 0.6339286), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[node name="GPUParticles3D" type="CPUParticles3D" unique_id=272843402]
+emitting = false
+amount = 40
+lifetime = 0.4
+one_shot = true
+preprocess = 0.05
+explosiveness = 1.0
+mesh = SubResource("BoxMesh_usgnq")
+spread = 180.0
+gravity = Vector3(0, 0, 0)
+initial_velocity_min = 25.0
+initial_velocity_max = 45.0
+scale_amount_curve = SubResource("Curve_vxas0")
+script = ExtResource("1_q7epf")

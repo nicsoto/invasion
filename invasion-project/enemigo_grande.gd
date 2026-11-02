@@ -6,6 +6,8 @@ var velocidad = 8.0
 var jugador = null
 var bala_escena = preload("res://bala.tscn")
 
+var explosion_escena = preload("res://explosion.tscn")
+
 var tiempo_disparo = 0.0 
 @onready var canon = $CanonEnemigo
 
@@ -49,4 +51,9 @@ func take_damage(cantidad):
 	if salud <= 30:
 		barra_vida_3d.get_active_material(0).albedo_color = Color.RED
 	if salud <= 0:
-		queue_free()
+		var nueva_explosion = explosion_escena.instantiate()
+		get_tree().current_scene.add_child(nueva_explosion)
+		nueva_explosion.global_position = global_position 
+		$MeshInstance3D.hide()
+		queue_free() 
+		
