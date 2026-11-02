@@ -5,6 +5,7 @@ signal derrotado
 signal impacto_bloqueado
 
 const Trazo = preload("res://terrestre/trazo.gd")
+var explosion_escena = preload("res://explosion.tscn")
 
 @export var salud_maxima := 100
 @export var dano := 12
@@ -53,7 +54,6 @@ func _physics_process(delta: float) -> void:
 	if _espera == 0 and is_instance_valid(_objetivo):
 		var punto := _objetivo.global_position + Vector3.UP * 1.3
 		if canon.global_position.distance_to(punto) <= alcance and _puede_ver(punto):
-			# Fija la posición al avisar: el jugador puede esquivar o buscar cobertura.
 			_destino_disparo = punto
 			_aviso = tiempo_aviso
 	_actualizar_estado()
@@ -78,7 +78,6 @@ func _disparar() -> void:
 	Trazo.mostrar(get_tree().current_scene, canon.global_position, fin, Color(1, 0.25, 0.15))
 
 func take_damage(_cantidad: int) -> void:
-	# La bala espacial existente llama este método: el blindaje la bloquea.
 	_flash = 0.4
 	impacto_bloqueado.emit()
 	_actualizar_estado()
@@ -89,6 +88,11 @@ func recibir_disparo_terrestre(cantidad: int) -> bool:
 	salud = maxi(0, salud - cantidad)
 	_actualizar_estado()
 	if salud == 0:
+		var nueva_explosion = explosion_escena.instantiate()
+		
+		nueva_explosion.global_position = global_position
+		get_tree().current_scene.add_child(nueva_explosion)
+		
 		derrotado.emit()
 		queue_free()
 	return true

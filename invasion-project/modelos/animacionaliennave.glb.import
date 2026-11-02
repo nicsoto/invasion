@@ -3,13 +3,13 @@
 importer="scene"
 importer_version=1
 type="PackedScene"
-uid="uid://dqqgqhsbbf7ej"
-path="res://.godot/imported/chata.glb-cc4219aa32a5a76613b6cda1e8369fd4.scn"
+uid="uid://dqin4p0jt85e8"
+path="res://.godot/imported/animacionaliennave.glb-9ffa55da98445138b8007bb03dbfd93b.scn"
 
 [deps]
 
-source_file="res://modelos/chata.glb"
-dest_files=["res://.godot/imported/chata.glb-cc4219aa32a5a76613b6cda1e8369fd4.scn"]
+source_file="res://modelos/animacionaliennave.glb"
+dest_files=["res://.godot/imported/animacionaliennave.glb-9ffa55da98445138b8007bb03dbfd93b.scn"]
 
 [params]
 

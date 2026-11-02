@@ -53,9 +53,18 @@ func bajar():
 	a_pie = true
 	nave.set_activa(false)
 	nave.global_transform = punto_nave.global_transform
+	
+	
+	if nave.has_node("chata/Armature/Skeleton3D/Cube_001"):
+		nave.get_node("chata/Armature/Skeleton3D/Cube_001").hide()
+	
 	personaje.global_position = punto_bajada.global_position
 	personaje.rotation = Vector3(0, punto_bajada.global_rotation.y, 0)
 	personaje.set_activo(true)
+	
+	
+	personaje.iniciar_animacion_bajada(nave)
+	
 	salud_pie.visible = true
 	mira.visible = true
 	baliza.visible = false
@@ -64,6 +73,11 @@ func subir():
 	a_pie = false
 	personaje.set_activo(false)
 	nave.set_activa(true)
+	
+	
+	if nave.has_node("chata/Armature/Skeleton3D/Cube_001"):
+		nave.get_node("chata/Armature/Skeleton3D/Cube_001").show()
+	
 	salud_pie.visible = false
 	mira.visible = false
 	baliza.visible = true
