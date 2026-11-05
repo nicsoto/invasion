@@ -2,6 +2,7 @@
 
 [ext_resource type="FontFile" uid="uid://dq8qmhelnujdc" path="res://UI/GlitchGoblin-2O87v.ttf" id="1_mae5d"]
 [ext_resource type="Texture2D" uid="uid://b1xeay5cswuu8" path="res://UI/uiahorasi.png" id="2_4hy44"]
+[ext_resource type="Script" uid="uid://rgh2k4recgbm" path="res://menu.gd" id="2_ytr4m"]
 [ext_resource type="Texture2D" uid="uid://ew7pud5mo7y0" path="res://UI/titulos.png" id="3_ytr4m"]
 [ext_resource type="FontFile" uid="uid://dtwt3uqhf0ceh" path="res://UI/VelodromeFuturisticTechStencil-Yq6wL.ttf" id="4_4hy44"]
 
@@ -119,6 +120,7 @@ atlas = ExtResource("2_4hy44")
 region = Rect2(48, 1368, 1360, 312)
 
 [node name="Control" type="Control" unique_id=958162143]
+process_mode = 3
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -126,6 +128,7 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 theme = SubResource("Theme_40soo")
+script = ExtResource("2_ytr4m")
 
 [node name="Menu principal" type="MarginContainer" parent="." unique_id=952771225]
 visible = false
@@ -139,7 +142,7 @@ offset_bottom = 630.0001
 layout_mode = 2
 theme_override_constants/separation = 3
 
-[node name="Button" type="Button" parent="Menu principal/VBoxContainer" unique_id=1908831686]
+[node name="boton niveles" type="Button" parent="Menu principal/VBoxContainer" unique_id=1908831686]
 custom_minimum_size = Vector2(450, 150)
 layout_mode = 2
 size_flags_horizontal = 0
@@ -153,7 +156,7 @@ theme_override_styles/pressed = SubResource("StyleBoxTexture_wnd53")
 theme_override_styles/hover = SubResource("StyleBoxTexture_r2hml")
 text = "Niveles"
 
-[node name="TextureRect" type="TextureRect" parent="Menu principal/VBoxContainer/Button" unique_id=924538798]
+[node name="TextureRect" type="TextureRect" parent="Menu principal/VBoxContainer/boton niveles" unique_id=924538798]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -163,7 +166,7 @@ grow_vertical = 2
 texture = SubResource("AtlasTexture_r2hml")
 expand_mode = 1
 
-[node name="Button2" type="Button" parent="Menu principal/VBoxContainer" unique_id=883788171]
+[node name="boton controles" type="Button" parent="Menu principal/VBoxContainer" unique_id=883788171]
 custom_minimum_size = Vector2(450, 150)
 layout_mode = 2
 size_flags_horizontal = 0
@@ -177,7 +180,7 @@ theme_override_styles/pressed = SubResource("StyleBoxTexture_wnd53")
 theme_override_styles/hover = SubResource("StyleBoxTexture_r2hml")
 text = "Controles"
 
-[node name="TextureRect" type="TextureRect" parent="Menu principal/VBoxContainer/Button2" unique_id=1558886810]
+[node name="TextureRect" type="TextureRect" parent="Menu principal/VBoxContainer/boton controles" unique_id=1558886810]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -187,7 +190,7 @@ grow_vertical = 2
 texture = SubResource("AtlasTexture_r2hml")
 expand_mode = 1
 
-[node name="Button3" type="Button" parent="Menu principal/VBoxContainer" unique_id=646236303]
+[node name="boton salir" type="Button" parent="Menu principal/VBoxContainer" unique_id=646236303]
 custom_minimum_size = Vector2(450, 150)
 layout_mode = 2
 size_flags_horizontal = 0
@@ -201,7 +204,7 @@ theme_override_styles/pressed = SubResource("StyleBoxTexture_wnd53")
 theme_override_styles/hover = SubResource("StyleBoxTexture_r2hml")
 text = "Salir"
 
-[node name="TextureRect" type="TextureRect" parent="Menu principal/VBoxContainer/Button3" unique_id=2023543249]
+[node name="TextureRect" type="TextureRect" parent="Menu principal/VBoxContainer/boton salir" unique_id=2023543249]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -259,6 +262,97 @@ offset_bottom = 120.96
 grow_horizontal = 2
 pivot_offset = Vector2(334.08, 60.48)
 texture = SubResource("AtlasTexture_3s7hd")
+expand_mode = 1
+
+[node name="niveles menú" type="MarginContainer" parent="." unique_id=373677168]
+visible = false
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -250.0
+offset_top = -187.00006
+offset_right = 250.0
+offset_bottom = 293.00006
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="niveles menú" unique_id=739876081]
+layout_mode = 2
+theme_override_constants/separation = 3
+
+[node name="boton nivel1" type="Button" parent="niveles menú/VBoxContainer" unique_id=231887187]
+custom_minimum_size = Vector2(450, 150)
+layout_mode = 2
+size_flags_horizontal = 0
+size_flags_vertical = 0
+offset_transform_enabled = true
+offset_transform_scale = Vector2(1.04, 1.04)
+theme_override_colors/font_color = Color(0.003921569, 1, 1, 1)
+theme_override_font_sizes/font_size = 68
+theme_override_styles/normal = SubResource("StyleBoxTexture_usgnq")
+theme_override_styles/pressed = SubResource("StyleBoxTexture_wnd53")
+theme_override_styles/hover = SubResource("StyleBoxTexture_r2hml")
+text = "Nivel 1"
+
+[node name="TextureRect" type="TextureRect" parent="niveles menú/VBoxContainer/boton nivel1" unique_id=1192362547]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = SubResource("AtlasTexture_r2hml")
+expand_mode = 1
+
+[node name="Button2" type="Button" parent="niveles menú/VBoxContainer" unique_id=1446540681]
+custom_minimum_size = Vector2(450, 150)
+layout_mode = 2
+size_flags_horizontal = 0
+size_flags_vertical = 0
+offset_transform_enabled = true
+offset_transform_scale = Vector2(1.04, 1.04)
+theme_override_colors/font_color = Color(0.003921569, 1, 1, 1)
+theme_override_font_sizes/font_size = 68
+theme_override_styles/normal = SubResource("StyleBoxTexture_usgnq")
+theme_override_styles/pressed = SubResource("StyleBoxTexture_wnd53")
+theme_override_styles/hover = SubResource("StyleBoxTexture_r2hml")
+text = "..."
+
+[node name="TextureRect" type="TextureRect" parent="niveles menú/VBoxContainer/Button2" unique_id=698873125]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = SubResource("AtlasTexture_r2hml")
+expand_mode = 1
+
+[node name="Button3" type="Button" parent="niveles menú/VBoxContainer" unique_id=1670278282]
+custom_minimum_size = Vector2(450, 150)
+layout_mode = 2
+size_flags_horizontal = 0
+size_flags_vertical = 0
+offset_transform_enabled = true
+offset_transform_scale = Vector2(1.04, 1.04)
+theme_override_colors/font_color = Color(0.07450981, 1, 1, 1)
+theme_override_font_sizes/font_size = 68
+theme_override_styles/normal = SubResource("StyleBoxTexture_usgnq")
+theme_override_styles/pressed = SubResource("StyleBoxTexture_wnd53")
+theme_override_styles/hover = SubResource("StyleBoxTexture_r2hml")
+text = "..."
+
+[node name="TextureRect" type="TextureRect" parent="niveles menú/VBoxContainer/Button3" unique_id=1818674790]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = SubResource("AtlasTexture_r2hml")
 expand_mode = 1
 
 [node name="respirar_titulo" type="AnimationPlayer" parent="." unique_id=1509105848]
@@ -347,6 +441,7 @@ text = "Back
 "
 
 [node name="pausamenu" type="MarginContainer" parent="." unique_id=2085169859]
+process_mode = 3
 visible = false
 layout_mode = 1
 anchors_preset = 8
@@ -413,7 +508,7 @@ grow_vertical = 2
 texture = SubResource("AtlasTexture_r2hml")
 expand_mode = 1
 
-[node name="Button3" type="Button" parent="pausamenu/VBoxContainer" unique_id=1983561046]
+[node name="menu desde pausa" type="Button" parent="pausamenu/VBoxContainer" unique_id=1983561046]
 custom_minimum_size = Vector2(450, 150)
 layout_mode = 2
 size_flags_horizontal = 0
@@ -427,7 +522,7 @@ theme_override_styles/pressed = SubResource("StyleBoxTexture_wnd53")
 theme_override_styles/hover = SubResource("StyleBoxTexture_r2hml")
 text = "Menu"
 
-[node name="TextureRect" type="TextureRect" parent="pausamenu/VBoxContainer/Button3" unique_id=1050184708]
+[node name="TextureRect" type="TextureRect" parent="pausamenu/VBoxContainer/menu desde pausa" unique_id=1050184708]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -540,6 +635,7 @@ texture = SubResource("AtlasTexture_njwan")
 expand_mode = 1
 
 [node name="VICTORIA" type="Button" parent="." unique_id=1642042463]
+visible = false
 layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5
@@ -699,3 +795,16 @@ grow_horizontal = 2
 grow_vertical = 2
 texture = SubResource("AtlasTexture_r2hml")
 expand_mode = 1
+
+[connection signal="pressed" from="Menu principal/VBoxContainer/boton niveles" to="." method="_on_boton_niveles_pressed"]
+[connection signal="pressed" from="Menu principal/VBoxContainer/boton controles" to="." method="_on_boton_controles_pressed"]
+[connection signal="pressed" from="Menu principal/VBoxContainer/boton salir" to="." method="_on_boton_salir_pressed"]
+[connection signal="pressed" from="niveles menú/VBoxContainer/boton nivel1" to="." method="_on_boton_nivel_1_pressed"]
+[connection signal="pressed" from="back" to="." method="_on_boton_back_pressed"]
+[connection signal="pressed" from="pausamenu/VBoxContainer/Button" to="." method="_on_boton_niveles_pressed"]
+[connection signal="pressed" from="pausamenu/VBoxContainer/Button2" to="." method="_on_boton_controles_pressed"]
+[connection signal="pressed" from="pausamenu/VBoxContainer/menu desde pausa" to="." method="_on_boton_menu_desde_pausa_pressed"]
+[connection signal="pressed" from="derrota menu/VBoxContainer/Button" to="." method="_on_boton_nivel1_pressed"]
+[connection signal="pressed" from="derrota menu/VBoxContainer/Button2" to="." method="_on_boton_menu_desde_pausa_pressed"]
+[connection signal="pressed" from="victoria menu/VBoxContainer/Button" to="." method="_on_boton_niveles_pressed"]
+[connection signal="pressed" from="victoria menu/VBoxContainer/Button2" to="." method="_on_boton_menu_desde_pausa_pressed"]
