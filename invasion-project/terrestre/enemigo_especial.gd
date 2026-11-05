@@ -34,6 +34,8 @@ var _flash := 0.0
 
 func _ready() -> void:
 	salud = salud_maxima
+	_luz_nucleo = _luz_nucleo.duplicate()
+	nucleo.material_override = _luz_nucleo
 	_origen = global_position
 	_actualizar_estado()
 
@@ -52,12 +54,12 @@ func _physics_process(delta: float) -> void:
 		var pos_mirar = Vector3(_objetivo.global_position.x, global_position.y, _objetivo.global_position.z)
 		
 		if global_position.distance_to(pos_mirar) > 0.1:
-			look_at(pos_mirar, Vector3.UP)
+			look_at(pos_mirar, Vector3.UP, true)
 		
 		
 		if global_position.distance_to(_objetivo.global_position) > 4.0:
 			var direccion = (pos_mirar - global_position).normalized()
-			velocity = direccion * 1.5 
+			velocity = direccion * velocidad_patrulla
 		else:
 			velocity = Vector3.ZERO
 	else:
@@ -139,8 +141,8 @@ func recibir_disparo_terrestre(cantidad: int) -> bool:
 	
 	if salud == 0:
 		var nueva_explosion = explosion_escena.instantiate()
-		nueva_explosion.global_position = global_position
 		get_tree().current_scene.add_child(nueva_explosion)
+		nueva_explosion.global_position = global_position
 		derrotado.emit()
 		queue_free()
 	return true

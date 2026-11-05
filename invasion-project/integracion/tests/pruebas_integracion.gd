@@ -30,6 +30,7 @@ func _tecla(codigo: Key) -> void:
 
 func _ejecutar() -> void:
 	var juego = Juego.instantiate()
+	juego.get_node("PersonajeTerrestre").reproducir_cinematicas = false
 	root.add_child(juego)
 	current_scene = juego
 	var nave = juego.nave
@@ -112,5 +113,9 @@ func _ejecutar() -> void:
 	_verificar(paused and nave.menu_muerte.visible, "Si el personaje muere aparece el menú de muerte")
 	paused = false
 
+	paused = false
+	if is_instance_valid(current_scene):
+		current_scene.queue_free()
+	await create_timer(0.25).timeout
 	print("RESULTADO: %d comprobaciones, %d fallos" % [_comprobaciones, _fallos])
 	quit(1 if _fallos else 0)

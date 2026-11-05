@@ -13,6 +13,8 @@ var _flash := 0.0
 @onready var _material: StandardMaterial3D = nucleo.get_active_material(0)
 
 func _ready() -> void:
+	_material = _material.duplicate()
+	nucleo.material_override = _material
 	salud = salud_maxima
 	_actualizar_visual()
 

@@ -1,6 +1,6 @@
-# Defensa de plataforma
+# Defensa de plataforma — Hito 2
 
-Primera ampliación del combate terrestre según el devlog posterior al Hito 1:
+Entrega de combate terrestre según el devlog posterior al Hito 1:
 una torre debe sobrevivir a una oleada, y el jugador tiene que bajar para
 eliminar a sus atacantes desde el interior de una cúpula.
 
@@ -32,6 +32,12 @@ asaltantes que se acercan a la torre. Cada uno requiere tres disparos terrestres
 La defensa termina con **victoria** cuando han aparecido y sido derrotados todos
 los atacantes y la torre sigue viva. Hay **derrota** si se destruye la torre o
 muere el piloto. Volver a la nave no detiene el ataque ni recupera la salud.
+
+La bajada reproduce la animación del equipo y entrega el control al finalizar.
+Mientras dura, no se puede disparar ni subir otra vez. Al recibir daño, el
+jugador ve un destello y la torre muestra una alerta; su barra cambia de color
+cuando está en estado crítico. Victoria y derrota tienen mensaje y sonido.
+La muerte del piloto muestra primero su secuencia y después permite reiniciar.
 
 ## Reglas de la cúpula
 
@@ -108,6 +114,20 @@ La plataforma emite el resultado; no pausa todo el juego por sí misma. La demo
 es quien pausa y muestra la victoria o derrota. El nivel integrado podrá decidir
 si desbloquea otra zona, inicia otro encuentro o termina la partida.
 
+Para **Benjamín**, `personaje.tscn` y `enemigo_especial.tscn` incluyen los nodos
+de audio, modelos y cámaras que necesitan sus scripts. El nivel de integración
+ya instancia estas escenas comunes: evitar copiar sus nodos dentro de otro
+nivel. Al bajar, llamar a `establecer_altura_superficie()` con la altura del
+marcador antes de activar al personaje; así la caída funciona en plataformas
+ubicadas a distintas alturas.
+
+Para **Benja**, cada instancia de `plataforma_defensa.tscn` puede colocarse y
+configurarse por separado. `cantidad_atacantes`, `preparacion` e
+`intervalo_llegadas` permiten ajustar el encuentro. La torre, la cúpula y sus
+efectos mantienen estados independientes; cada atacante pertenece a su propia
+torre. La demo de esta carpeta prueba una defensa completa, mientras que el
+mapa definitivo y su progresión quedan a cargo del nivel.
+
 El generador incluido es local a esta defensa y tiene un final definido. No es
 el generador global de niveles ni reemplaza los spawners espaciales del equipo.
 Cada atacante recibe explícitamente su torre y su cúpula; no busca la primera
@@ -127,14 +147,15 @@ consulta de cúpulas en `bala.gd` y el envío del contexto en `personaje.gd`.
 ## Apariencia y alcance
 
 Se reutilizan el alienígena, el arma, la nebulosa, las rocas y la ambientación
-existentes. La torre usa los verdes oscuros y las formas de seis lados del
-centinela, con núcleo lima y alerta naranja. La cúpula es translúcida, y su
+existentes, junto con las naves, el modelo de centinela, la animación de bajada
+y los sonidos incorporados por Antonia. La torre mantiene los verdes oscuros,
+las formas de seis lados, el núcleo lima y la alerta naranja. La cúpula es translúcida, y su
 destello de bloqueo usa el mismo cian del blindaje del enemigo.
 
-La nave sigue usando el modelo provisional de la escena de integración. Esta
-entrega contiene una plataforma y una oleada; la distribución por el mapa,
-la progresión entre niveles, nuevas clases de enemigos, animaciones y sonido
-quedan para las siguientes tareas del equipo.
+Esta entrega contiene una plataforma y una oleada; la distribución por el mapa,
+la progresión entre niveles, nuevas clases de enemigos y el acabado completo
+quedan para las siguientes tareas del equipo. F5 conserva la escena principal
+del proyecto; usar F6 sobre `demo_defensa.tscn` para probar esta parte.
 
 ## Verificación
 
@@ -142,9 +163,13 @@ quedan para las siguientes tareas del equipo.
 godot --headless --path invasion-project --script res://terrestre/tests/pruebas_defensa.gd
 godot --headless --path invasion-project --script res://terrestre/tests/pruebas_terrestres.gd
 godot --headless --path invasion-project --script res://integracion/tests/pruebas_integracion.gd
+godot --headless --path invasion-project --script res://terrestre/tests/pruebas_hito2.gd
 ```
 
 Las pruebas cubren las intersecciones de la cúpula, disparos reales a ambos lados,
 fuego amigo, daño a la torre mientras se pilota, llegadas pendientes, transición,
 pausa, victoria, derrota y reinicio. Las dos suites anteriores comprueban que
 el combate terrestre y la integración del Hito 1 siguen funcionando.
+La suite del Hito 2 prueba además las animaciones reales, pausa y reinicios
+durante las transiciones o la muerte, caída en plataformas bajas, feedback de
+daño, estados visuales independientes y asignación de atacantes a su cúpula.

@@ -38,6 +38,8 @@ func _physics_process(delta: float) -> void:
 	_actualizar_estado()
 
 func _disparar() -> void:
+	sonido_disparo.pitch_scale = randf_range(0.85, 1.15)
+	sonido_disparo.play()
 	var desde := canon.global_position
 	var hasta := _destino_disparo
 	var escudo := ReglasCupula.interceptar(get_tree(), desde, hasta, &"enemigo_pequeno")
@@ -60,7 +62,8 @@ func _disparar() -> void:
 func recibir_disparo_desde(cantidad: int, atacante: Node3D) -> bool:
 	if not is_instance_valid(atacante) or not is_instance_valid(cupula):
 		return false
-	if not atacante.is_in_group("personaje_terrestre") or not atacante.activo:
+	if not atacante.is_in_group("personaje_terrestre") or not atacante.activo \
+			or atacante.en_transicion:
 		return false
 	if not cupula.contiene(atacante.camara.global_position):
 		cupula.notificar_bloqueo()

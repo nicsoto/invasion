@@ -6,6 +6,7 @@
 [ext_resource type="PackedScene" path="res://jugador.tscn" id="4"]
 [ext_resource type="PackedScene" path="res://terrestre/personaje.tscn" id="5"]
 [ext_resource type="PackedScene" path="res://terrestre/arte/ambientacion.tscn" id="6"]
+[ext_resource type="AudioStream" path="res://Sonido/golpe enemigo_michael_grinnell__metallic-clunk.wav" id="sonido_torre"]
 
 
 [sub_resource type="PanoramaSkyMaterial" id="CieloMaterial"]
@@ -60,6 +61,15 @@ position = Vector3(0, -8, -70)
 
 
 [node name="HUD" type="CanvasLayer" parent="."]
+
+[node name="Golpe" type="ColorRect" parent="HUD"]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+color = Color(0.9, 0.12, 0.04, 0)
 
 [node name="Aviso" type="Label" parent="HUD"]
 anchors_preset = 7
@@ -207,3 +217,11 @@ theme_override_colors/font_color = Color(0.65, 1, 0.25, 1)
 theme_override_font_sizes/font_size = 30
 horizontal_alignment = 1
 vertical_alignment = 1
+
+[node name="SonidoTorre" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("sonido_torre")
+volume_db = -14.0
+
+[node name="SonidoResultado" type="AudioStreamPlayer" parent="."]
+process_mode = 3
+volume_db = -8.0

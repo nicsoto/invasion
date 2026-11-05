@@ -43,6 +43,7 @@ func _ejecutar() -> void:
 	current_scene = mundo
 	_bloque(mundo, Vector3(0, -0.5, 0), Vector3(40, 1, 40))
 	var jugador = Personaje.instantiate()
+	jugador.reproducir_cinematicas = false
 	jugador.position = Vector3(0, 0.1, 4)
 	mundo.add_child(jugador)
 	jugador.murio.connect(func(): _muertes += 1)
@@ -134,6 +135,7 @@ func _ejecutar() -> void:
 		"La muerte ocurre una vez y desactiva al personaje")
 
 	var caida = Personaje.instantiate()
+	caida.reproducir_cinematicas = false
 	caida.position = Vector3(0, -30, 0)
 	mundo.add_child(caida)
 	await _pasos(3)
@@ -168,5 +170,9 @@ func _ejecutar() -> void:
 	_verificar(not paused and current_scene.get_instance_id() != instancia_anterior
 		and get_nodes_in_group("enemigo_especial").size() == 2,
 		"R reinicia la escena y restaura los enemigos")
+	paused = false
+	if is_instance_valid(current_scene):
+		current_scene.queue_free()
+	await create_timer(0.25).timeout
 	print("RESULTADO: %d comprobaciones, %d fallos" % [_comprobaciones, _fallos])
 	quit(1 if _fallos else 0)

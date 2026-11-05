@@ -1,8 +1,14 @@
-[gd_scene load_steps=5 format=3]
+[gd_scene format=3]
 
 [ext_resource type="Script" path="res://terrestre/personaje.gd" id="1"]
 [ext_resource type="ArrayMesh" path="res://terrestre/arte/hito0/alien.res" id="2"]
 [ext_resource type="ArrayMesh" path="res://terrestre/arte/hito0/arma.res" id="3"]
+
+[ext_resource type="PackedScene" path="res://animacionaliennave.tscn" id="cinematica"]
+[ext_resource type="AudioStream" path="res://Sonido/disparo jugador_fantozzi__ftz_gc_118_phaserattack1.wav" id="disparo"]
+[ext_resource type="AudioStream" path="res://Sonido/golpe enemigo_michael_grinnell__metallic-clunk.wav" id="impacto"]
+[ext_resource type="AudioStream" path="res://Sonido/golpe jugador__jetrod__clonk1.wav" id="dano"]
+[ext_resource type="AudioStream" path="res://Sonido/pasos - heyheytheree .wav" id="pasos"]
 
 [sub_resource type="CapsuleShape3D" id="Cuerpo"]
 radius = 0.35
@@ -41,3 +47,28 @@ cast_shadow = 0
 
 [node name="Canon" type="Marker3D" parent="Cabeza"]
 position = Vector3(-0.32, -0.28, -1.01)
+
+[node name="SonidoDisparo" type="AudioStreamPlayer" parent="Cabeza"]
+stream = ExtResource("disparo")
+volume_db = -10.0
+
+[node name="SonidoHitEnemigo" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("impacto")
+volume_db = -8.0
+
+[node name="SonidoDanoRecibido" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("dano")
+volume_db = -6.0
+
+[node name="SonidoPasos" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("pasos")
+volume_db = -14.0
+
+[node name="Cinematica" parent="." instance=ExtResource("cinematica")]
+transform = Transform3D(-0.9998862, 0, 0.015083782, 0, 1, 0, -0.015083782, 0, -0.9998862, -5.662079, -0.037459373, 0.5208626)
+visible = false
+
+[node name="CamaraCinematica" type="Camera3D" parent="."]
+transform = Transform3D(-0.99465466, 0.03541345, -0.09699562, -0.039986126, 0.73396003, 0.67801464, 0.095201746, 0.6782688, -0.7286207, -3.4133067, 2.9734716, -2.6681175)
+
+[node name="CamaraMuerte" type="Camera3D" parent="."]

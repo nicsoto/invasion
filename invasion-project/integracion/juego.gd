@@ -60,6 +60,7 @@ func bajar():
 	
 	personaje.global_position = punto_bajada.global_position
 	personaje.rotation = Vector3(0, punto_bajada.global_rotation.y, 0)
+	personaje.establecer_altura_superficie(punto_bajada.global_position.y)
 	personaje.set_activo(true)
 	
 	
@@ -83,7 +84,7 @@ func subir():
 	baliza.visible = true
 
 func _al_pedir_subir(_personaje):
-	if not personaje_cerca_de_la_nave():
+	if not personaje_cerca_de_la_nave() or personaje.en_transicion or personaje.esta_muerto:
 		return
 	get_viewport().set_input_as_handled()
 	subir()

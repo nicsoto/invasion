@@ -11,6 +11,7 @@ var _flash := 0.0
 
 func _ready() -> void:
 	add_to_group("cupula_defensa")
+	visual.material_override = visual.material_override.duplicate()
 	visual.scale = Vector3.ONE * radio
 
 func _process(delta: float) -> void:

@@ -24,9 +24,10 @@ Ambos modos serán necesarios para avanzar. El desafío estará en decidir cuán
 El proyecto se desarrolla en **Godot** y está en `invasion-project/`. Incluye combate espacial, combate a pie y el prototipo integrado presentado en el Hito 1.
 
 La integración del Hito 1 está en `integracion/juego.tscn`, con cambio entre nave
-y personaje. Esta rama también incorpora la primera defensa de plataforma del
-siguiente devlog: torre con salud, cúpula que restringe los ataques y una oleada
-finita. Para probarla, abrir `terrestre/defensa/demo_defensa.tscn` y pulsar **F6**.
+y personaje. La parte terrestre del **Hito 2** se prueba en
+`terrestre/defensa/demo_defensa.tscn` con **F6**: torre con salud, cúpula que
+restringe los ataques, oleada finita, desembarco animado, victoria, derrota y
+reinicio. Reutiliza los modelos y sonidos incorporados por el equipo.
 Ver la [guía de defensa](invasion-project/terrestre/defensa/README.md).
 
 Para probar el combate terrestre en Godot, abre `terrestre/demo_terrestre.tscn` y presiona **F6**. Incluye movimiento y disparos a pie, plataformas, cobertura y enemigos especiales. Consulta los [controles y la guía de integración](invasion-project/terrestre/README.md).

@@ -114,6 +114,7 @@ func ejecutar() -> void:
 	await limpiar()
 
 	var juego = Demo.instantiate()
+	juego.get_node("PersonajeTerrestre").reproducir_cinematicas = false
 	root.add_child(juego)
 	current_scene = juego
 	var defensa = juego.defensa
@@ -165,7 +166,8 @@ func ejecutar() -> void:
 		juego.personaje.camara.look_at(segundo.global_position)
 		juego.personaje.disparar()
 		await pasos(16)
-	verificar(juego.terminado and paused and juego.resultado.text.begins_with("PLATAFORMA DEFENDIDA"),
+	verificar(juego.terminado and paused and juego.resultado.text.begins_with("PLATAFORMA DEFENDIDA")
+		and juego.contador.text == "AMENAZAS RESTANTES: 0",
 		"Eliminar la oleada completa con disparos reales muestra la victoria")
 	await tecla(KEY_P)
 	verificar(paused, "P no reanuda una partida terminada")
@@ -173,6 +175,7 @@ func ejecutar() -> void:
 	await tecla(KEY_R)
 	await pasos(3)
 	juego = current_scene
+	juego.personaje.reproducir_cinematicas = false
 	verificar(juego.get_instance_id() != instancia and not paused and juego.defensa.torre.salud == 180,
 		"R reinicia la escena, la torre, el control y la oleada")
 	juego.defensa.torre.recibir_ataque_pequeno(180)
@@ -182,6 +185,7 @@ func ejecutar() -> void:
 	await tecla(KEY_R)
 	await pasos(3)
 	juego = current_scene
+	juego.personaje.reproducir_cinematicas = false
 	juego.nave.global_position = juego.punto_nave.global_position
 	await tecla(KEY_E)
 	juego.personaje.take_damage(100)
@@ -189,5 +193,9 @@ func ejecutar() -> void:
 	verificar(paused and juego.resultado.text.begins_with("PILOTO DERROTADO"),
 		"La muerte del piloto también termina la defensa")
 	await limpiar()
+	paused = false
+	if is_instance_valid(current_scene):
+		current_scene.queue_free()
+	await create_timer(0.25).timeout
 	print("RESULTADO: %d comprobaciones, %d fallos" % [comprobaciones, fallos])
 	quit(1 if fallos else 0)

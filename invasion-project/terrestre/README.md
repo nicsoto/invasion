@@ -1,15 +1,17 @@
-# Combate terrestre — Hito 1
+# Combate terrestre
 
-Primera versión de la parte de Nicolás. Incluye una escena jugable independiente,
-un personaje reutilizable y centinelas que solo reciben daño del arma terrestre.
+Parte de Nicolás: personaje reutilizable, disparos a pie, coberturas, enemigos
+especiales y defensa de torres. El personaje y el centinela son escenas comunes
+usadas tanto por las demos terrestres como por `integracion/juego.tscn`.
 
-La ampliación posterior al Hito 1 está en
+La entrega terrestre del **Hito 2** está en
 [`defensa/demo_defensa.tscn`](defensa/demo_defensa.tscn): una plataforma con torre,
 cúpula y una oleada que obliga a combatir a pie. Abrir esa escena y pulsar **F6**.
 Consultar la [guía de defensa e integración](defensa/README.md) para sus reglas,
-parámetros y señales. La demo terrestre descrita debajo sigue disponible.
+parámetros y señales. Incluye los modelos, sonidos y animación de desembarco del
+equipo. La demo terrestre original descrita debajo sigue disponible.
 
-## Probar en Godot
+## Probar la demo original en Godot
 
 1. Importar `invasion-project/project.godot` con Godot 4.7.1, la versión usada para
    validar esta implementación (el proyecto declara Godot 4.7).
@@ -33,11 +35,11 @@ Si Godot no está en el PATH, usar la ruta al ejecutable en lugar de `godot`.
 | Shift | Correr |
 | Esc | Pausar / continuar la demo |
 | R | Reiniciar la demo, también después de morir o ganar |
-| E | Emitir solicitud de interacción para el futuro abordaje |
+| E | Solicitar interacción; en la integración permite volver a la nave |
 
-El objetivo es destruir los dos centinelas. Se mueven lateralmente y avisan antes
-de disparar hacia la posición donde te detectaron: puedes esquivar o buscar
-cobertura. Cada uno tiene 100 de salud y necesita cuatro impactos de 25.
+El objetivo es destruir los dos centinelas. Se acercan al personaje y avisan antes
+de disparar: puedes buscar cobertura. Cada uno tiene 100 de salud y necesita
+cuatro impactos de 25.
 La mira cambia al acertar. La demo muestra la salud, el objetivo y los controles.
 Caer al vacío o perder toda la salud termina el intento; R permite repetirlo.
 
@@ -45,12 +47,13 @@ Caer al vacío o perder toda la salud termina el intento; R permite repetirlo.
 
 La escena usa la nebulosa verde, el alienígena, el arma de colores y las rocas
 del juego de referencia `Hito0-space shooter.exe`. Se añadieron planetas verdes
-decorativos, centinelas de formas angulares con núcleo luminoso y una interfaz
+decorativos, los modelos nuevos de centinela con núcleo luminoso y una interfaz
 negra con detalles verde lima. El núcleo de cada centinela cambia a naranja al
 avisar un ataque y a cian al bloquear un disparo espacial.
 
-El personaje tiene el modelo original en pose fija; las animaciones quedan
-pendientes. Las coberturas de roca conservan colisiones de caja simplificadas.
+El personaje conserva el modelo original y utiliza la animación de desembarco
+aportada por Antonia, además de retroceso, movimiento de cámara, pasos y una
+secuencia de muerte. Las coberturas conservan colisiones de caja simplificadas.
 Los controles, el daño y las señales de integración siguen siendo los del
 prototipo terrestre. Los recursos y sus adaptaciones están documentados en
 [arte/hito0/README.md](arte/hito0/README.md).
@@ -64,11 +67,11 @@ prototipo terrestre. Los recursos y sus adaptaciones están documentados en
   saltar. Son formas provisionales editables en el editor.
 - Disparo instantáneo mediante una consulta física desde la cámara, con alcance,
   cadencia y un trazo visual breve. Las rocas bloquean los disparos de ambos lados.
-- Centinela con patrulla corta, aviso de ataque, vida e inmunidad al arma espacial.
+- Centinela con persecución, aviso de ataque, vida e inmunidad al arma espacial.
 - Activación/desactivación y señales para conectar la transición.
 
-La gravedad alrededor de planetas esféricos, los assets finales y el abordaje
-de la nave quedan pendientes. El blindaje es una primera regla de prototipo para
+La gravedad alrededor de planetas esféricos y el acabado completo quedan
+pendientes. El blindaje es una regla de prototipo para
 probar la necesidad del combate a pie; no simula todavía la evasión de naves
 pequeñas descrita en la historia.
 
@@ -83,7 +86,9 @@ La interfaz del controlador es:
 ```gdscript
 # Al bajar: desactivar primero el controlador de la nave y su grupo "jugador".
 personaje.global_position = punto_de_bajada.global_position
+personaje.establecer_altura_superficie(punto_de_bajada.global_position.y)
 personaje.set_activo(true) # Activa colisión, control, visibilidad y cámara propia.
+personaje.iniciar_animacion_bajada(nave)
 
 # Al subir: después activar la nave y hacer actual su cámara.
 personaje.set_activo(false)
@@ -110,6 +115,15 @@ Señales disponibles:
   una nave cerca y si se puede subir; este script no teletransporta al jugador.
 - `salud_cambiada(actual, maxima)` y `murio`: para HUD y fin de partida.
 - `disparo_realizado(acerto)`: para efectos, sonido o indicadores de impacto.
+- `bajada_finalizada`: al recuperar el control después del desembarco.
+
+Durante `en_transicion` no se permiten movimiento, disparos ni abordaje; el
+personaje es invulnerable. Desactivarlo cancela la animación y restaura la nave.
+`camara` y `camara_fps` apuntan a la misma cámara para mantener compatibilidad.
+La salud llega a cero y el control se desactiva inmediatamente al morir;
+`murio` se emite después de la secuencia de muerte. Las pruebas de lógica pueden
+usar `reproducir_cinematicas = false`; `pruebas_hito2.gd` verifica el flujo real
+con las cinemáticas habilitadas, incluida su interrupción por pausa o reinicio.
 
 Al conectar un HUD después de `_ready`, leer también `salud` y `salud_maxima`
 para establecer el valor inicial. Las acciones `pie_*` se registran al iniciar
