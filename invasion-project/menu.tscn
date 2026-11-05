@@ -1,0 +1,701 @@
+[gd_scene format=3 uid="uid://daewek8nhinha"]
+
+[ext_resource type="FontFile" uid="uid://dq8qmhelnujdc" path="res://UI/GlitchGoblin-2O87v.ttf" id="1_mae5d"]
+[ext_resource type="Texture2D" uid="uid://b1xeay5cswuu8" path="res://UI/uiahorasi.png" id="2_4hy44"]
+[ext_resource type="Texture2D" uid="uid://ew7pud5mo7y0" path="res://UI/titulos.png" id="3_ytr4m"]
+[ext_resource type="FontFile" uid="uid://dtwt3uqhf0ceh" path="res://UI/VelodromeFuturisticTechStencil-Yq6wL.ttf" id="4_4hy44"]
+
+[sub_resource type="Theme" id="Theme_40soo"]
+default_font = ExtResource("1_mae5d")
+default_font_size = 16
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_mtxbc"]
+atlas = ExtResource("2_4hy44")
+region = Rect2(216, 2904, 1520, 544)
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_usgnq"]
+texture = SubResource("AtlasTexture_mtxbc")
+modulate_color = Color(0.89411765, 0.9882353, 0.7294118, 0.43137255)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_c12ck"]
+atlas = ExtResource("2_4hy44")
+region = Rect2(232, 2904, 1536, 552)
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_wnd53"]
+texture = SubResource("AtlasTexture_c12ck")
+modulate_color = Color(0.89411765, 0.9882353, 0.7294118, 0.9098039)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ytxnp"]
+atlas = ExtResource("2_4hy44")
+region = Rect2(232, 2904, 1520, 544)
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_r2hml"]
+texture = SubResource("AtlasTexture_ytxnp")
+modulate_color = Color(0.89411765, 0.9882353, 0.7294118, 0.6627451)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_r2hml"]
+atlas = ExtResource("2_4hy44")
+region = Rect2(856, 2136, 744, 272)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_40soo"]
+atlas = ExtResource("2_4hy44")
+region = Rect2(1520, 1416, 400, 264)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_4v63h"]
+atlas = ExtResource("2_4hy44")
+region = Rect2(1736, 1696, 200, 208)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_2cg6m"]
+atlas = ExtResource("2_4hy44")
+region = Rect2(272, 2064, 672, 48)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_3s7hd"]
+atlas = ExtResource("3_ytr4m")
+region = Rect2(64, 352, 928, 168)
+
+[sub_resource type="Animation" id="Animation_l48gv"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("invasion:scale")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(1, 1)]
+}
+
+[sub_resource type="Animation" id="Animation_ecwwl"]
+resource_name = "respirartitulo"
+length = 4.0
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("invasion:scale")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 2.01, 4),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Vector2(1, 1), Vector2(0.95, 0.95), Vector2(1, 1)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_kk3ma"]
+_data = {
+&"RESET": SubResource("Animation_l48gv"),
+&"respirartitulo": SubResource("Animation_ecwwl")
+}
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_eg8xt"]
+atlas = ExtResource("2_4hy44")
+region = Rect2(0, 0, 1224, 688)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_4hy44"]
+atlas = ExtResource("2_4hy44")
+region = Rect2(48, 1456, 1376, 224)
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_eg8xt"]
+texture = SubResource("AtlasTexture_4hy44")
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_wnd53"]
+atlas = ExtResource("3_ytr4m")
+region = Rect2(72, 32, 688, 176)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ytr4m"]
+atlas = ExtResource("2_4hy44")
+region = Rect2(64, 2480, 1920, 424)
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_mtxbc"]
+texture = SubResource("AtlasTexture_ytr4m")
+modulate_color = Color(0.5647059, 0.92941177, 0.43137255, 0.31764707)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_njwan"]
+atlas = ExtResource("2_4hy44")
+region = Rect2(48, 1368, 1360, 312)
+
+[node name="Control" type="Control" unique_id=958162143]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = SubResource("Theme_40soo")
+
+[node name="Menu principal" type="MarginContainer" parent="." unique_id=952771225]
+visible = false
+layout_mode = 0
+offset_left = 29.0
+offset_top = 150.0
+offset_right = 529.0
+offset_bottom = 630.0001
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Menu principal" unique_id=60144468]
+layout_mode = 2
+theme_override_constants/separation = 3
+
+[node name="Button" type="Button" parent="Menu principal/VBoxContainer" unique_id=1908831686]
+custom_minimum_size = Vector2(450, 150)
+layout_mode = 2
+size_flags_horizontal = 0
+size_flags_vertical = 0
+offset_transform_enabled = true
+offset_transform_scale = Vector2(1.04, 1.04)
+theme_override_colors/font_color = Color(0.003921569, 1, 1, 1)
+theme_override_font_sizes/font_size = 68
+theme_override_styles/normal = SubResource("StyleBoxTexture_usgnq")
+theme_override_styles/pressed = SubResource("StyleBoxTexture_wnd53")
+theme_override_styles/hover = SubResource("StyleBoxTexture_r2hml")
+text = "Niveles"
+
+[node name="TextureRect" type="TextureRect" parent="Menu principal/VBoxContainer/Button" unique_id=924538798]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = SubResource("AtlasTexture_r2hml")
+expand_mode = 1
+
+[node name="Button2" type="Button" parent="Menu principal/VBoxContainer" unique_id=883788171]
+custom_minimum_size = Vector2(450, 150)
+layout_mode = 2
+size_flags_horizontal = 0
+size_flags_vertical = 0
+offset_transform_enabled = true
+offset_transform_scale = Vector2(1.04, 1.04)
+theme_override_colors/font_color = Color(0.003921569, 1, 1, 1)
+theme_override_font_sizes/font_size = 68
+theme_override_styles/normal = SubResource("StyleBoxTexture_usgnq")
+theme_override_styles/pressed = SubResource("StyleBoxTexture_wnd53")
+theme_override_styles/hover = SubResource("StyleBoxTexture_r2hml")
+text = "Controles"
+
+[node name="TextureRect" type="TextureRect" parent="Menu principal/VBoxContainer/Button2" unique_id=1558886810]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = SubResource("AtlasTexture_r2hml")
+expand_mode = 1
+
+[node name="Button3" type="Button" parent="Menu principal/VBoxContainer" unique_id=646236303]
+custom_minimum_size = Vector2(450, 150)
+layout_mode = 2
+size_flags_horizontal = 0
+size_flags_vertical = 0
+offset_transform_enabled = true
+offset_transform_scale = Vector2(1.04, 1.04)
+theme_override_colors/font_color = Color(0.07450981, 1, 1, 1)
+theme_override_font_sizes/font_size = 68
+theme_override_styles/normal = SubResource("StyleBoxTexture_usgnq")
+theme_override_styles/pressed = SubResource("StyleBoxTexture_wnd53")
+theme_override_styles/hover = SubResource("StyleBoxTexture_r2hml")
+text = "Salir"
+
+[node name="TextureRect" type="TextureRect" parent="Menu principal/VBoxContainer/Button3" unique_id=2023543249]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = SubResource("AtlasTexture_r2hml")
+expand_mode = 1
+
+[node name="TextureRect" type="TextureRect" parent="." unique_id=353339293]
+visible = false
+modulate = Color(1, 1, 1, 0.26666668)
+layout_mode = 1
+anchors_preset = 3
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -345.0
+offset_top = -199.0
+offset_right = 5.0
+offset_bottom = 1.0
+grow_horizontal = 0
+grow_vertical = 0
+texture = SubResource("AtlasTexture_40soo")
+expand_mode = 1
+
+[node name="pelota carga" type="TextureRect" parent="." unique_id=1345436515]
+visible = false
+layout_mode = 1
+offset_right = 150.0
+offset_bottom = 150.0
+texture = SubResource("AtlasTexture_4v63h")
+expand_mode = 1
+
+[node name="frametitulo" type="TextureRect" parent="." unique_id=761925282]
+visible = false
+layout_mode = 0
+offset_left = 128.0
+offset_top = 88.0
+offset_right = 718.0
+offset_bottom = 139.2
+texture = SubResource("AtlasTexture_2cg6m")
+expand_mode = 1
+
+[node name="invasion" type="TextureRect" parent="." unique_id=2115156191]
+visible = false
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -296.0
+offset_right = 372.1599
+offset_bottom = 120.96
+grow_horizontal = 2
+pivot_offset = Vector2(334.08, 60.48)
+texture = SubResource("AtlasTexture_3s7hd")
+expand_mode = 1
+
+[node name="respirar_titulo" type="AnimationPlayer" parent="." unique_id=1509105848]
+libraries/ = SubResource("AnimationLibrary_kk3ma")
+autoplay = &"respirartitulo"
+
+[node name="TextureRect4" type="TextureRect" parent="." unique_id=1509215777]
+visible = false
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -475.0
+offset_top = -185.0
+offset_right = 475.0
+offset_bottom = 315.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = SubResource("AtlasTexture_eg8xt")
+expand_mode = 1
+
+[node name="Label" type="Label" parent="." unique_id=1734508143]
+visible = false
+layout_mode = 0
+offset_left = 160.0
+offset_top = 256.0
+offset_right = 578.0
+offset_bottom = 463.0
+size_flags_horizontal = 0
+theme_override_colors/font_color = Color(0.07450981, 1, 1, 1)
+theme_override_fonts/font = ExtResource("4_4hy44")
+theme_override_font_sizes/font_size = 52
+text = "Pausar/Despausar: P
+Aterrizar/Bajar: E
+Moverse: WASD
+Sprint: W+W"
+
+[node name="Label2" type="Label" parent="." unique_id=2118952590]
+visible = false
+layout_mode = 0
+offset_left = 584.0
+offset_top = 256.0
+offset_right = 1002.0
+offset_bottom = 463.0
+size_flags_horizontal = 0
+theme_override_colors/font_color = Color(0.07450981, 1, 1, 1)
+theme_override_fonts/font = ExtResource("4_4hy44")
+theme_override_font_sizes/font_size = 52
+text = "Disparar: Left Click
+Ascender: Space bar
+Descender: Q"
+
+[node name="controles" type="Label" parent="." unique_id=1853311879]
+visible = false
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -280.0
+offset_top = 40.0
+offset_right = 82.0
+offset_bottom = 115.0
+grow_horizontal = 2
+theme_override_colors/font_color = Color(0.5647059, 0.92941177, 0.43137255, 1)
+theme_override_font_sizes/font_size = 65
+text = "Controles"
+
+[node name="back" type="Button" parent="." unique_id=116238683]
+visible = false
+layout_mode = 1
+anchors_preset = 2
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_left = 8.0
+offset_top = -40.0
+offset_right = 208.0
+offset_bottom = 13.0
+grow_vertical = 0
+scale = Vector2(0.715, 0.715)
+theme_override_colors/font_color = Color(0.5647059, 0.92941177, 0.43137255, 1)
+theme_override_font_sizes/font_size = 38
+theme_override_styles/normal = SubResource("StyleBoxTexture_eg8xt")
+text = "Back
+"
+
+[node name="pausamenu" type="MarginContainer" parent="." unique_id=2085169859]
+visible = false
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -250.0
+offset_top = -187.00006
+offset_right = 250.0
+offset_bottom = 293.00006
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="pausamenu" unique_id=510016933]
+layout_mode = 2
+theme_override_constants/separation = 3
+
+[node name="Button" type="Button" parent="pausamenu/VBoxContainer" unique_id=242309718]
+custom_minimum_size = Vector2(450, 150)
+layout_mode = 2
+size_flags_horizontal = 0
+size_flags_vertical = 0
+offset_transform_enabled = true
+offset_transform_scale = Vector2(1.04, 1.04)
+theme_override_colors/font_color = Color(0.003921569, 1, 1, 1)
+theme_override_font_sizes/font_size = 68
+theme_override_styles/normal = SubResource("StyleBoxTexture_usgnq")
+theme_override_styles/pressed = SubResource("StyleBoxTexture_wnd53")
+theme_override_styles/hover = SubResource("StyleBoxTexture_r2hml")
+text = "Niveles"
+
+[node name="TextureRect" type="TextureRect" parent="pausamenu/VBoxContainer/Button" unique_id=172750182]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = SubResource("AtlasTexture_r2hml")
+expand_mode = 1
+
+[node name="Button2" type="Button" parent="pausamenu/VBoxContainer" unique_id=538911978]
+custom_minimum_size = Vector2(450, 150)
+layout_mode = 2
+size_flags_horizontal = 0
+size_flags_vertical = 0
+offset_transform_enabled = true
+offset_transform_scale = Vector2(1.04, 1.04)
+theme_override_colors/font_color = Color(0.003921569, 1, 1, 1)
+theme_override_font_sizes/font_size = 68
+theme_override_styles/normal = SubResource("StyleBoxTexture_usgnq")
+theme_override_styles/pressed = SubResource("StyleBoxTexture_wnd53")
+theme_override_styles/hover = SubResource("StyleBoxTexture_r2hml")
+text = "Controles"
+
+[node name="TextureRect" type="TextureRect" parent="pausamenu/VBoxContainer/Button2" unique_id=403160048]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = SubResource("AtlasTexture_r2hml")
+expand_mode = 1
+
+[node name="Button3" type="Button" parent="pausamenu/VBoxContainer" unique_id=1983561046]
+custom_minimum_size = Vector2(450, 150)
+layout_mode = 2
+size_flags_horizontal = 0
+size_flags_vertical = 0
+offset_transform_enabled = true
+offset_transform_scale = Vector2(1.04, 1.04)
+theme_override_colors/font_color = Color(0.07450981, 1, 1, 1)
+theme_override_font_sizes/font_size = 68
+theme_override_styles/normal = SubResource("StyleBoxTexture_usgnq")
+theme_override_styles/pressed = SubResource("StyleBoxTexture_wnd53")
+theme_override_styles/hover = SubResource("StyleBoxTexture_r2hml")
+text = "Menu"
+
+[node name="TextureRect" type="TextureRect" parent="pausamenu/VBoxContainer/Button3" unique_id=1050184708]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = SubResource("AtlasTexture_r2hml")
+expand_mode = 1
+
+[node name="pausa" type="TextureRect" parent="." unique_id=716684889]
+visible = false
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -256.0
+offset_right = 432.0
+offset_bottom = 176.0
+grow_horizontal = 2
+scale = Vector2(0.66, 0.66)
+texture = SubResource("AtlasTexture_wnd53")
+
+[node name="mensaje" type="Label" parent="." unique_id=524015346]
+visible = false
+layout_mode = 0
+offset_left = 125.0
+offset_top = 97.0
+offset_right = 605.0
+offset_bottom = 116.0
+theme_override_colors/font_color = Color(0.5647059, 0.92941177, 0.43137255, 1)
+text = "Derrota a los enemigos antes de que destruyan tu base"
+
+[node name="pelota mensaje" type="TextureRect" parent="." unique_id=853750323]
+visible = false
+layout_mode = 1
+offset_top = 52.0
+offset_right = 150.0
+offset_bottom = 202.0
+scale = Vector2(0.585, 0.585)
+texture = SubResource("AtlasTexture_4v63h")
+expand_mode = 1
+
+[node name="framemensaje" type="TextureRect" parent="." unique_id=1029379160]
+visible = false
+layout_mode = 0
+offset_left = 64.0
+offset_top = 112.0
+offset_right = 1364.0
+offset_bottom = 163.20001
+scale = Vector2(0.41, 0.41)
+texture = SubResource("AtlasTexture_2cg6m")
+expand_mode = 1
+
+[node name="cleared" type="Button" parent="." unique_id=1411321076]
+visible = false
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -448.0
+offset_top = -76.0
+offset_right = 448.0
+offset_bottom = 76.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_colors/font_color = Color(0.003921569, 1, 1, 1)
+theme_override_font_sizes/font_size = 58
+theme_override_styles/normal = SubResource("StyleBoxTexture_mtxbc")
+text = "BASE CLEARED"
+
+[node name="clearedframe" type="TextureRect" parent="cleared" unique_id=1587215458]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = SubResource("AtlasTexture_njwan")
+expand_mode = 1
+
+[node name="DERROTA" type="Button" parent="." unique_id=1114511834]
+visible = false
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -448.0
+offset_top = -243.0
+offset_right = 448.0
+offset_bottom = -91.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_colors/font_color = Color(0.003921569, 1, 1, 1)
+theme_override_font_sizes/font_size = 58
+theme_override_styles/normal = SubResource("StyleBoxTexture_mtxbc")
+text = "GAME OVER"
+
+[node name="clearedframe" type="TextureRect" parent="DERROTA" unique_id=1312357172]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = SubResource("AtlasTexture_njwan")
+expand_mode = 1
+
+[node name="VICTORIA" type="Button" parent="." unique_id=1642042463]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -448.0
+offset_top = -243.0
+offset_right = 448.0
+offset_bottom = -91.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_colors/font_color = Color(0.003921569, 1, 1, 1)
+theme_override_font_sizes/font_size = 58
+theme_override_styles/normal = SubResource("StyleBoxTexture_mtxbc")
+text = "VICTORIA"
+
+[node name="clearedframe" type="TextureRect" parent="VICTORIA" unique_id=1694650523]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = SubResource("AtlasTexture_njwan")
+expand_mode = 1
+
+[node name="derrota menu" type="MarginContainer" parent="." unique_id=1149739406]
+visible = false
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -250.0
+offset_top = -51.00006
+offset_right = 250.0
+offset_bottom = 429.00006
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="derrota menu" unique_id=240274745]
+layout_mode = 2
+theme_override_constants/separation = 3
+
+[node name="Button" type="Button" parent="derrota menu/VBoxContainer" unique_id=2059583866]
+custom_minimum_size = Vector2(450, 150)
+layout_mode = 2
+size_flags_horizontal = 0
+size_flags_vertical = 0
+offset_transform_enabled = true
+offset_transform_scale = Vector2(1.04, 1.04)
+theme_override_colors/font_color = Color(0.003921569, 1, 1, 1)
+theme_override_font_sizes/font_size = 68
+theme_override_styles/normal = SubResource("StyleBoxTexture_usgnq")
+theme_override_styles/pressed = SubResource("StyleBoxTexture_wnd53")
+theme_override_styles/hover = SubResource("StyleBoxTexture_r2hml")
+text = "retry"
+
+[node name="TextureRect" type="TextureRect" parent="derrota menu/VBoxContainer/Button" unique_id=190701776]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = SubResource("AtlasTexture_r2hml")
+expand_mode = 1
+
+[node name="Button2" type="Button" parent="derrota menu/VBoxContainer" unique_id=525977410]
+custom_minimum_size = Vector2(450, 150)
+layout_mode = 2
+size_flags_horizontal = 0
+size_flags_vertical = 0
+offset_transform_enabled = true
+offset_transform_scale = Vector2(1.04, 1.04)
+theme_override_colors/font_color = Color(0.003921569, 1, 1, 1)
+theme_override_font_sizes/font_size = 68
+theme_override_styles/normal = SubResource("StyleBoxTexture_usgnq")
+theme_override_styles/pressed = SubResource("StyleBoxTexture_wnd53")
+theme_override_styles/hover = SubResource("StyleBoxTexture_r2hml")
+text = "Menu"
+
+[node name="TextureRect" type="TextureRect" parent="derrota menu/VBoxContainer/Button2" unique_id=818903697]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = SubResource("AtlasTexture_r2hml")
+expand_mode = 1
+
+[node name="victoria menu" type="MarginContainer" parent="." unique_id=221492123]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -250.0
+offset_top = -51.00006
+offset_right = 250.0
+offset_bottom = 429.00006
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="victoria menu" unique_id=1524166702]
+layout_mode = 2
+theme_override_constants/separation = 3
+
+[node name="Button" type="Button" parent="victoria menu/VBoxContainer" unique_id=379182668]
+custom_minimum_size = Vector2(450, 150)
+layout_mode = 2
+size_flags_horizontal = 0
+size_flags_vertical = 0
+offset_transform_enabled = true
+offset_transform_scale = Vector2(1.04, 1.04)
+theme_override_colors/font_color = Color(0.003921569, 1, 1, 1)
+theme_override_font_sizes/font_size = 68
+theme_override_styles/normal = SubResource("StyleBoxTexture_usgnq")
+theme_override_styles/pressed = SubResource("StyleBoxTexture_wnd53")
+theme_override_styles/hover = SubResource("StyleBoxTexture_r2hml")
+text = "NIVELES"
+
+[node name="TextureRect" type="TextureRect" parent="victoria menu/VBoxContainer/Button" unique_id=1045324959]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = SubResource("AtlasTexture_r2hml")
+expand_mode = 1
+
+[node name="Button2" type="Button" parent="victoria menu/VBoxContainer" unique_id=419130141]
+custom_minimum_size = Vector2(450, 150)
+layout_mode = 2
+size_flags_horizontal = 0
+size_flags_vertical = 0
+offset_transform_enabled = true
+offset_transform_scale = Vector2(1.04, 1.04)
+theme_override_colors/font_color = Color(0.003921569, 1, 1, 1)
+theme_override_font_sizes/font_size = 68
+theme_override_styles/normal = SubResource("StyleBoxTexture_usgnq")
+theme_override_styles/pressed = SubResource("StyleBoxTexture_wnd53")
+theme_override_styles/hover = SubResource("StyleBoxTexture_r2hml")
+text = "Menu"
+
+[node name="TextureRect" type="TextureRect" parent="victoria menu/VBoxContainer/Button2" unique_id=1465912683]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = SubResource("AtlasTexture_r2hml")
+expand_mode = 1
