@@ -1,0 +1,27 @@
+[gd_scene format=3]
+
+[ext_resource type="PackedScene" path="res://integracion/nivel_base.tscn" id="1"]
+[ext_resource type="PackedScene" path="res://terrestre/defensa/plataforma_defensa.tscn" id="2"]
+
+[node name="Nivel3" instance=ExtResource("1")]
+numero = 3
+max_enemigos_espaciales = 3
+intervalo_enemigos = 11.0
+
+[node name="Plataforma1" parent="Plataformas" instance=ExtResource("2")]
+transform = Transform3D(0.939693, 0, -0.342020, 0, 1, 0, 0.342020, 0, 0.939693, -60, -10, -120)
+cantidad_atacantes = 5
+preparacion = 20.0
+intervalo_llegadas = 4.5
+
+[node name="Plataforma2" parent="Plataformas" instance=ExtResource("2")]
+transform = Transform3D(0.766044, 0, 0.642788, 0, 1, 0, -0.642788, 0, 0.766044, 150, 15, -210)
+cantidad_atacantes = 6
+preparacion = 28.0
+intervalo_llegadas = 4.0
+
+[node name="Plataforma3" parent="Plataformas" instance=ExtResource("2")]
+transform = Transform3D(0.984808, 0, -0.173648, 0, 1, 0, 0.173648, 0, 0.984808, -20, 30, -370)
+cantidad_atacantes = 7
+preparacion = 30.0
+intervalo_llegadas = 3.5
