@@ -1,4 +1,5 @@
 extends Control
+@onready var fondo_3d: SubViewportContainer = $SubViewportContainer
 
 @onready var menu_principal = $"Menu principal"
 @onready var invasion = $invasion
@@ -32,6 +33,7 @@ func alternar_pausa():
 		pausa.show()
 		pausamenu.show()
 		
+		fondo_3d.hide()
 		menu_principal.hide()
 		invasion.hide()
 		niveles_menu.hide()
@@ -54,6 +56,7 @@ func _on_boton_controles_pressed():
 	invasion.hide()
 	menu_principal.hide()
 	
+	fondo_3d.show()
 	controles.show()
 	label_1.show()
 	label_2.show()
@@ -64,6 +67,7 @@ func _on_boton_controles_pressed():
 func _on_boton_niveles_pressed():
 	menu_principal.hide()
 	
+	fondo_3d.show()
 	niveles_menu.show()
 	boton_back.show()
 
@@ -76,6 +80,7 @@ func _on_boton_back_pressed():
 		texture_rect_4.hide()
 		niveles_menu.hide()
 		boton_back.hide()
+		fondo_3d.hide()
 	
 		pausa.show()
 		pausamenu.show()
@@ -100,5 +105,6 @@ func volver_al_inicio():
 	texture_rect_4.hide()
 	boton_back.hide()
 	
+	fondo_3d.show()
 	menu_principal.show()
 	invasion.show()

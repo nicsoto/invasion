@@ -3,6 +3,7 @@
 [ext_resource type="FontFile" uid="uid://dq8qmhelnujdc" path="res://UI/GlitchGoblin-2O87v.ttf" id="1_mae5d"]
 [ext_resource type="Texture2D" uid="uid://b1xeay5cswuu8" path="res://UI/uiahorasi.png" id="2_4hy44"]
 [ext_resource type="Script" uid="uid://rgh2k4recgbm" path="res://menu.gd" id="2_ytr4m"]
+[ext_resource type="PackedScene" uid="uid://n4fgbdlvgoxa" path="res://idlemenusaludo.tscn" id="3_l48gv"]
 [ext_resource type="Texture2D" uid="uid://ew7pud5mo7y0" path="res://UI/titulos.png" id="3_ytr4m"]
 [ext_resource type="FontFile" uid="uid://dtwt3uqhf0ceh" path="res://UI/VelodromeFuturisticTechStencil-Yq6wL.ttf" id="4_4hy44"]
 
@@ -129,6 +130,21 @@ grow_horizontal = 2
 grow_vertical = 2
 theme = SubResource("Theme_40soo")
 script = ExtResource("2_ytr4m")
+
+[node name="SubViewportContainer" type="SubViewportContainer" parent="." unique_id=363724631]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="SubViewport" type="SubViewport" parent="SubViewportContainer" unique_id=1073179643]
+handle_input_locally = false
+size = Vector2i(1152, 648)
+render_target_update_mode = 4
+
+[node name="idlemenusaludooo" parent="SubViewportContainer/SubViewport" unique_id=940305593 instance=ExtResource("3_l48gv")]
 
 [node name="Menu principal" type="MarginContainer" parent="." unique_id=952771225]
 visible = false

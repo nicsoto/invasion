@@ -1,0 +1,113 @@
+[gd_scene format=3 uid="uid://n4fgbdlvgoxa"]
+
+[ext_resource type="PackedScene" uid="uid://dx1fdxgeb85gg" path="res://modelos/idlemenusaludooo.glb" id="1_r3b36"]
+[ext_resource type="Script" uid="uid://cn63njyco5kcl" path="res://idlemenusaludo.gd" id="2_5ct7m"]
+[ext_resource type="Texture2D" uid="uid://bee1k6eksheio" path="res://HDR_multi_nebulae_1.hdr" id="2_fup7h"]
+[ext_resource type="Script" uid="uid://dc6jreoykqyby" path="res://asteroidesmainmenu.gd" id="3_5ct7m"]
+[ext_resource type="PackedScene" uid="uid://cwwqyqh1cvou3" path="res://asteroide.tscn" id="4_x7joo"]
+
+[sub_resource type="PanoramaSkyMaterial" id="PanoramaSkyMaterial_ik1wy"]
+panorama = ExtResource("2_fup7h")
+
+[sub_resource type="Sky" id="Cielo"]
+sky_material = SubResource("PanoramaSkyMaterial_ik1wy")
+
+[sub_resource type="Environment" id="Environment_lc0t6"]
+background_mode = 2
+sky = SubResource("Cielo")
+glow_enabled = true
+
+[node name="idlemenusaludooo" unique_id=940305593 instance=ExtResource("1_r3b36")]
+script = ExtResource("2_5ct7m")
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="." index="0" unique_id=1271163977]
+environment = SubResource("Environment_lc0t6")
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="WorldEnvironment" index="0" unique_id=262987082]
+transform = Transform3D(1, 6.352574e-08, -6.878413e-08, 2.7805946e-08, 0.49999994, 0.86602545, 8.940697e-08, -0.86602545, 0.49999994, 0, 3, 2)
+shadow_enabled = true
+
+[node name="Node3D2" type="Node3D" parent="." index="1" unique_id=1857075351]
+
+[node name="Skeleton3D" parent="Armature" parent_id_path=PackedInt32Array(632233312) index="0" unique_id=932729938]
+bones/7/rotation = Quaternion(-0.06538241, 0.11462144, -0.5960974, 0.7919943)
+bones/8/rotation = Quaternion(0.6089806, -0.1752722, -0.17921044, 0.7525331)
+bones/9/rotation = Quaternion(0.13888131, -0.09603115, 0.07033121, 0.9831295)
+bones/10/rotation = Quaternion(-0.019808741, -0.04799434, 0.61678433, 0.785418)
+bones/11/rotation = Quaternion(-0.0069642207, 0.034900386, 0.31615052, 0.9480413)
+bones/12/rotation = Quaternion(-0.029543238, 7.670681e-05, 0.0010427653, 0.99956304)
+bones/13/position = Vector3(-1.5723268e-08, 0.5662685, 3.5527137e-15)
+bones/13/rotation = Quaternion(-0.4395478, -0.55389327, -0.43954787, 0.5538933)
+bones/14/rotation = Quaternion(-0.64938706, -0.51766133, -0.22040068, 0.51161194)
+bones/15/position = Vector3(1.5723268e-08, 0.5662685, 3.5527137e-15)
+bones/15/rotation = Quaternion(-0.41025746, 0.5759243, 0.41025752, 0.57592446)
+bones/16/rotation = Quaternion(-0.6142, 0.40730187, 0.3313187, 0.58914465)
+
+[node name="Node3D" type="Node3D" parent="." index="6" unique_id=1417368453]
+script = ExtResource("3_5ct7m")
+
+[node name="Asteroide" parent="Node3D" index="0" unique_id=1396565999 instance=ExtResource("4_x7joo")]
+transform = Transform3D(0.565, 0, 0, 0, 0.565, 0, 0, 0, 0.565, -25, 0, -18)
+
+[node name="Asteroide19" parent="Node3D" index="1" unique_id=713754236 instance=ExtResource("4_x7joo")]
+transform = Transform3D(0.565, 0, 0, 0, 0.565, 0, 0, 0, 0.565, -191.69102, 0, -96.37458)
+
+[node name="Asteroide20" parent="Node3D" index="2" unique_id=308964049 instance=ExtResource("4_x7joo")]
+transform = Transform3D(0.565, 0, 0, 0, 0.565, 0, 0, 0, 0.565, -191.69102, -64.07831, -96.37458)
+
+[node name="Asteroide21" parent="Node3D" index="3" unique_id=1418009546 instance=ExtResource("4_x7joo")]
+transform = Transform3D(0.565, 0, 0, 0, 0.565, 0, 0, 0, 0.565, -139.41554, 53.80088, -125.86764)
+
+[node name="Asteroide2" parent="Node3D" index="4" unique_id=1662549570 instance=ExtResource("4_x7joo")]
+transform = Transform3D(0.565, 0, 0, 0, 0.565, 0, 0, 0, 0.565, 24.765362, 0, -18)
+
+[node name="Asteroide3" parent="Node3D" index="5" unique_id=1427820354 instance=ExtResource("4_x7joo")]
+transform = Transform3D(1.535, 0, 0, 0, 1.535, 0, 0, 0, 1.535, -1.0024147, -22.885984, -17.112059)
+
+[node name="Asteroide4" parent="Node3D" index="6" unique_id=1879066290 instance=ExtResource("4_x7joo")]
+transform = Transform3D(1.535, 0, 0, 0, 1.535, 0, 0, 0, 1.535, 50.75366, 1.3701496, -157.7087)
+
+[node name="Asteroide5" parent="Node3D" index="7" unique_id=275158412 instance=ExtResource("4_x7joo")]
+transform = Transform3D(1.535, 0, 0, 0, 1.535, 0, 0, 0, 1.535, -127.79166, 1.3701496, -157.7087)
+
+[node name="Asteroide6" parent="Node3D" index="8" unique_id=1905480632 instance=ExtResource("4_x7joo")]
+transform = Transform3D(1.79, 0, 0, 0, 1.79, 0, 0, 0, 1.79, -127.79166, -112.103935, -157.7087)
+
+[node name="Asteroide7" parent="Node3D" index="9" unique_id=422237417 instance=ExtResource("4_x7joo")]
+transform = Transform3D(1.79, 0, 0, 0, 1.79, 0, 0, 0, 1.79, 219.3075, -112.103935, -157.7087)
+
+[node name="Asteroide8" parent="Node3D" index="10" unique_id=578002519 instance=ExtResource("4_x7joo")]
+transform = Transform3D(1.26, 0, 0, 0, 1.26, 0, 0, 0, 1.26, 219.3075, -10.069511, -157.7087)
+
+[node name="Asteroide9" parent="Node3D" index="11" unique_id=389099965 instance=ExtResource("4_x7joo")]
+transform = Transform3D(1.26, 0, 0, 0, 1.26, 0, 0, 0, 1.26, -24.154938, 70.93799, -157.7087)
+
+[node name="Asteroide10" parent="Node3D" index="12" unique_id=1078064072 instance=ExtResource("4_x7joo")]
+transform = Transform3D(1.26, 0, 0, 0, 1.26, 0, 0, 0, 1.26, 152.3226, 70.93799, 87.75047)
+
+[node name="Asteroide11" parent="Node3D" index="13" unique_id=1132855873 instance=ExtResource("4_x7joo")]
+transform = Transform3D(1.705, 0, 0, 0, 1.705, 0, 0, 0, 1.705, -243.95157, 70.93799, 87.75047)
+
+[node name="Asteroide12" parent="Node3D" index="14" unique_id=1658047767 instance=ExtResource("4_x7joo")]
+transform = Transform3D(1.705, 0, 0, 0, 1.705, 0, 0, 0, 1.705, -243.95157, -197.78815, 87.75047)
+
+[node name="Asteroide13" parent="Node3D" index="15" unique_id=463830720 instance=ExtResource("4_x7joo")]
+transform = Transform3D(1.705, 0, 0, 0, 1.705, 0, 0, 0, 1.705, -536.7058, -197.78815, 87.75047)
+
+[node name="Asteroide14" parent="Node3D" index="16" unique_id=1632968250 instance=ExtResource("4_x7joo")]
+transform = Transform3D(1.705, 0, 0, 0, 1.705, 0, 0, 0, 1.705, 50.448975, 86.5686, 384.0747)
+
+[node name="Asteroide15" parent="Node3D" index="17" unique_id=1240811871 instance=ExtResource("4_x7joo")]
+transform = Transform3D(1.88, 0, 0, 0, 1.88, 0, 0, 0, 1.88, 50.448975, 214.12964, 75.08945)
+
+[node name="Asteroide16" parent="Node3D" index="18" unique_id=466622327 instance=ExtResource("4_x7joo")]
+transform = Transform3D(1.88, 0, 0, 0, 1.88, 0, 0, 0, 1.88, 252.73483, 214.12964, 75.08945)
+
+[node name="Asteroide17" parent="Node3D" index="19" unique_id=2064705004 instance=ExtResource("4_x7joo")]
+transform = Transform3D(1.88, 0, 0, 0, 1.88, 0, 0, 0, 1.88, 252.73483, 214.12964, 327.73187)
+
+[node name="Asteroide18" parent="Node3D" index="20" unique_id=925250795 instance=ExtResource("4_x7joo")]
+transform = Transform3D(1.88, 0, 0, 0, 1.88, 0, 0, 0, 1.88, -214.94632, 214.12964, 327.73187)
+
+[node name="Camera3D" type="Camera3D" parent="." index="7" unique_id=1887276254]
+transform = Transform3D(0.99294597, -0.045325737, 0.10956214, 0, 0.92404765, 0.38227743, -0.11856764, -0.37958086, 0.91752934, -3.0018158, 4.6282673, 6.3792725)
