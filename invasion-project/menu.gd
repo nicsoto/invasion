@@ -24,6 +24,14 @@ const Partida = preload("res://integracion/partida.gd")
 @onready var titulo_derrota = $DERROTA
 @onready var titulo_victoria = $VICTORIA
 
+@onready var texture_rect: TextureRect = $TextureRect
+@onready var pelota_carga: TextureRect = $"pelota carga"
+@onready var frametitulo: TextureRect = $frametitulo
+
+@onready var derrota: Button = $DERROTA
+@onready var victoria: Button = $VICTORIA
+@onready var mirareal: TextureRect = $mirareal
+
 
 func _ready():
 	get_tree().paused = false
@@ -48,6 +56,7 @@ func alternar_pausa():
 		pausa.show()
 		pausamenu.show()
 		
+		mirareal.hide()
 		menu_principal.hide()
 		invasion.hide()
 		niveles_menu.hide()
@@ -59,6 +68,7 @@ func alternar_pausa():
 	else:
 		pausa.hide()
 		pausamenu.hide()
+		mirareal.hide()
 
 
 # botones Menú Principal
@@ -69,6 +79,11 @@ func _on_boton_salir_pressed():
 func _on_boton_controles_pressed():
 	invasion.hide()
 	menu_principal.hide()
+	mirareal.hide()
+	
+	texture_rect.show()
+	pelota_carga.show()
+	frametitulo.show()
 	
 	controles.show()
 	label_1.show()
@@ -80,7 +95,12 @@ func _on_boton_controles_pressed():
 func _on_boton_niveles_pressed():
 	ocultar_resultados()
 	menu_principal.hide()
+	mirareal.hide()
 	
+	invasion.show()
+	texture_rect.show()
+	pelota_carga.show()
+	frametitulo.show()
 	niveles_menu.show()
 	boton_back.show()
 
@@ -93,6 +113,7 @@ func _on_boton_back_pressed():
 		texture_rect_4.hide()
 		niveles_menu.hide()
 		boton_back.hide()
+		mirareal.hide()
 	
 		pausa.show()
 		pausamenu.show()
@@ -100,12 +121,15 @@ func _on_boton_back_pressed():
 		volver_al_inicio()
 
 func _on_boton_nivel1_pressed():
+	mirareal.show()
 	jugar_nivel(1)
 
 func _on_boton_nivel2_pressed():
+	mirareal.show()
 	jugar_nivel(2)
 
 func _on_boton_nivel3_pressed():
+	mirareal.show()
 	jugar_nivel(3)
 
 func _on_boton_reintentar_pressed():
@@ -127,25 +151,29 @@ func ocultar_resultados():
 	titulo_cleared.hide()
 	titulo_derrota.hide()
 	titulo_victoria.hide()
+	mirareal.hide()
 
 func mostrar_victoria():
 	volver_al_inicio()
+	mirareal.hide()
 	menu_principal.hide()
 	invasion.hide()
 	victoria_menu.show()
 	if Partida.es_ultimo_nivel(Partida.nivel_actual):
-		titulo_victoria.show()
+		victoria.show()
 	else:
 		titulo_cleared.show()
 
 func mostrar_derrota():
+	mirareal.hide()
 	volver_al_inicio()
 	menu_principal.hide()
 	invasion.hide()
 	derrota_menu.show()
-	titulo_derrota.show()
+	derrota.show()
 
 func volver_al_inicio():
+	mirareal.hide()
 	ocultar_resultados()
 	niveles_menu.hide()
 	controles.hide()
@@ -154,5 +182,8 @@ func volver_al_inicio():
 	texture_rect_4.hide()
 	boton_back.hide()
 	
+	texture_rect.show()
+	pelota_carga.show()
+	frametitulo.show()
 	menu_principal.show()
 	invasion.show()

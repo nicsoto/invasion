@@ -119,6 +119,10 @@ modulate_color = Color(0.5647059, 0.92941177, 0.43137255, 0.31764707)
 atlas = ExtResource("2_4hy44")
 region = Rect2(48, 1368, 1360, 312)
 
+[sub_resource type="AtlasTexture" id="AtlasTexture_usgnq"]
+atlas = ExtResource("2_4hy44")
+region = Rect2(1296, 32, 336, 328)
+
 [node name="Control" type="Control" unique_id=958162143]
 process_mode = 3
 layout_mode = 3
@@ -131,7 +135,6 @@ theme = SubResource("Theme_40soo")
 script = ExtResource("2_ytr4m")
 
 [node name="Menu principal" type="MarginContainer" parent="." unique_id=952771225]
-visible = false
 layout_mode = 0
 offset_left = 29.0
 offset_top = 150.0
@@ -215,7 +218,6 @@ texture = SubResource("AtlasTexture_r2hml")
 expand_mode = 1
 
 [node name="TextureRect" type="TextureRect" parent="." unique_id=353339293]
-visible = false
 modulate = Color(1, 1, 1, 0.26666668)
 layout_mode = 1
 anchors_preset = 3
@@ -233,7 +235,6 @@ texture = SubResource("AtlasTexture_40soo")
 expand_mode = 1
 
 [node name="pelota carga" type="TextureRect" parent="." unique_id=1345436515]
-visible = false
 layout_mode = 1
 offset_right = 150.0
 offset_bottom = 150.0
@@ -241,7 +242,6 @@ texture = SubResource("AtlasTexture_4v63h")
 expand_mode = 1
 
 [node name="frametitulo" type="TextureRect" parent="." unique_id=761925282]
-visible = false
 layout_mode = 0
 offset_left = 128.0
 offset_top = 88.0
@@ -251,7 +251,6 @@ texture = SubResource("AtlasTexture_2cg6m")
 expand_mode = 1
 
 [node name="invasion" type="TextureRect" parent="." unique_id=2115156191]
-visible = false
 layout_mode = 1
 anchors_preset = 5
 anchor_left = 0.5
@@ -795,6 +794,23 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 texture = SubResource("AtlasTexture_r2hml")
+expand_mode = 1
+
+[node name="mirareal" type="TextureRect" parent="." unique_id=57226879]
+modulate = Color(1, 1, 1, 0.7019608)
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -25.0
+offset_top = -25.0
+offset_right = 25.0
+offset_bottom = 25.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = SubResource("AtlasTexture_usgnq")
 expand_mode = 1
 
 [connection signal="pressed" from="Menu principal/VBoxContainer/boton niveles" to="." method="_on_boton_niveles_pressed"]

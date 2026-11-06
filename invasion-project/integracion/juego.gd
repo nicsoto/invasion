@@ -13,7 +13,7 @@ var baliza: Label3D
 @onready var personaje = $PersonajeTerrestre
 @onready var aviso: Label = $HUD/Aviso
 @onready var salud_pie: ProgressBar = $HUD/SaludPie
-@onready var mira: Label = $HUD/Mira
+@onready var mira = $HUD/Mira
 
 func _ready():
 	elegir_plataforma(plataforma_mas_cercana())

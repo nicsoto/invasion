@@ -38,6 +38,7 @@ var _salud_torre_anterior := 0
 @onready var sonido_torre: AudioStreamPlayer = $SonidoTorre
 @onready var sonido_resultado: AudioStreamPlayer = $SonidoResultado
 
+
 func _ready():
 	for plataforma in lista_plataformas:
 		plataforma.add_to_group("plataforma_aterrizaje")
