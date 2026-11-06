@@ -11,7 +11,7 @@ config_version=5
 [application]
 
 config/name="invasion project"
-run/main_scene="uid://c7wnp5v8o2lcv"
+run/main_scene="uid://daewek8nhinha"
 config/features=PackedStringArray("4.7", "Forward Plus")
 config/icon="res://icon.svg"
 
