@@ -4,17 +4,19 @@ extends Node3D
 @export var distancia_para_subir := 6.0
 
 var a_pie := false
+var plataforma_actual: Node3D = null
+var punto_nave: Marker3D
+var punto_bajada: Marker3D
+var baliza: Label3D
 
 @onready var nave = $jugador
 @onready var personaje = $PersonajeTerrestre
-@onready var punto_nave: Marker3D = $BaseAsteroide/PuntoNave
-@onready var punto_bajada: Marker3D = $BaseAsteroide/PuntoBajada
-@onready var baliza: Label3D = $BaseAsteroide/Baliza
 @onready var aviso: Label = $HUD/Aviso
 @onready var salud_pie: ProgressBar = $HUD/SaludPie
 @onready var mira: Label = $HUD/Mira
 
 func _ready():
+	elegir_plataforma(plataforma_mas_cercana())
 	personaje.interaccion_solicitada.connect(_al_pedir_subir)
 	personaje.salud_cambiada.connect(_al_cambiar_salud_pie)
 	personaje.murio.connect(_al_morir_a_pie)
@@ -23,7 +25,33 @@ func _ready():
 	salud_pie.visible = false
 	mira.visible = false
 
+func plataformas() -> Array:
+	var lista = get_tree().get_nodes_in_group("plataforma_aterrizaje")
+	if lista.is_empty() and has_node("BaseAsteroide"):
+		lista = [get_node("BaseAsteroide")]
+	return lista
+
+func plataforma_mas_cercana() -> Node3D:
+	var mejor: Node3D = null
+	var mejor_distancia := INF
+	for plataforma in plataformas():
+		var distancia = nave.global_position.distance_to(plataforma.get_node("PuntoNave").global_position)
+		if distancia < mejor_distancia:
+			mejor = plataforma
+			mejor_distancia = distancia
+	return mejor
+
+func elegir_plataforma(plataforma: Node3D):
+	if plataforma == null or plataforma == plataforma_actual:
+		return
+	plataforma_actual = plataforma
+	punto_nave = plataforma.get_node("PuntoNave")
+	punto_bajada = plataforma.get_node("PuntoBajada")
+	baliza = plataforma.get_node_or_null("Baliza")
+
 func _process(_delta):
+	if not a_pie:
+		elegir_plataforma(plataforma_mas_cercana())
 	if a_pie:
 		if personaje_cerca_de_la_nave():
 			aviso.text = "E: subir a la nave"
@@ -68,7 +96,8 @@ func bajar():
 	
 	salud_pie.visible = true
 	mira.visible = true
-	baliza.visible = false
+	if baliza:
+		baliza.visible = false
 
 func subir():
 	a_pie = false
@@ -81,7 +110,8 @@ func subir():
 	
 	salud_pie.visible = false
 	mira.visible = false
-	baliza.visible = true
+	if baliza:
+		baliza.visible = true
 
 func _al_pedir_subir(_personaje):
 	if not personaje_cerca_de_la_nave() or personaje.en_transicion or personaje.esta_muerto:
